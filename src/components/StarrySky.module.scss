@@ -1,0 +1,141 @@
+// Warna Bintang dari Referensi Anda
+$star-color-1: #FBFCCA;
+$star-color-2: #D7F3FE;
+$star-color-3: #FFD0A7;
+
+.sky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; // Menggunakan 100vh agar pasti mengisi tinggi layar
+  background: #201E30;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* --- BINTANG BERGERAK (Dihasilkan Otomatis) --- */
+
+// Fungsi SASS untuk menghasilkan bayangan (bintang) secara acak
+@function create_stars($n) {
+  $shadows: "#{random(2000)}px #{random(2000)}px #{$star-color-1}";
+
+  @for $i from 2 through $n {
+    // Pilih warna secara acak
+    $color: nth(($star-color-1, $star-color-2, $star-color-3), random(3));
+    $shadows: "#{$shadows}, #{random(2000)}px #{random(2000)}px #{$color}";
+  }
+  @return unquote($shadows);
+}
+
+.stars, .stars2, .stars3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  // Looping animasi tak terbatas (infinite)
+  animation: move-stars 200s linear infinite;
+}
+
+// Lapisan 1: Paling banyak, paling kecil, paling lambat
+.stars {
+  box-shadow: create_stars(700);
+}
+
+// Lapisan 2: Sedang
+.stars2 {
+  // Ukuran sedikit lebih besar dengan pseudo-element
+  &::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    box-shadow: create_stars(200);
+  }
+  animation-duration: 150s;
+}
+
+// Lapisan 3: Paling sedikit, paling besar, paling cepat
+.stars3 {
+  &::after {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    box-shadow: create_stars(100);
+  }
+  animation-duration: 100s;
+}
+
+@keyframes move-stars {
+  from { transform: translateY(0); }
+  to { transform: translateY(-2000px); } // Loop seamless
+}
+
+
+/* --- BINTANG JATUH (Dihasilkan Otomatis & Acak) --- */
+
+// Keyframes untuk berbagai arah bintang jatuh
+@keyframes shoot-1 {
+  0% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(300px, 300px); opacity: 0; }
+}
+@keyframes shoot-2 {
+  0% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(400px, -500px); opacity: 0; }
+}
+@keyframes shoot-3 {
+  0% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(-350px, 250px); opacity: 0; }
+}
+@keyframes shoot-4 {
+  0% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(-400px, -400px); opacity: 0; }
+}
+
+
+.shootingStar {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(-45deg, $star-color-1, rgba(0, 0, 0, 0));
+  border-radius: 999px;
+  filter: drop-shadow(0 0 6px $star-color-1);
+  opacity: 0;
+}
+
+// Loop SASS untuk membuat setiap bintang jatuh unik
+@for $i from 1 through 15 { // Angka 15 harus sama dengan shootingStarCount di React
+  .shootingStar:nth-child(#{$i}) {
+    $duration: #{random(3) + 2}s;      // Durasi acak antara 2s dan 5s
+    $delay: #{random(15)}s;           // Delay acak hingga 15s
+    $direction: random(4);             // Pilih 1 dari 4 arah acak
+
+    top: #{random(100)}vh;
+    left: #{random(100)}vw;
+    animation: shoot-#{$direction} #{$duration} ease-in-out #{$delay} infinite;
+
+    // Ekornya juga dianimasikan dengan delay yang sama
+    &::after {
+      content: '';
+      position: absolute;
+      top: -1px;
+      right: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(-45deg, rgba(0, 0, 0, 0), $star-color-1, rgba(0, 0, 0, 0));
+      border-radius: 100%;
+      transform: translateX(50%) rotateZ(45deg);
+      animation: tail #{$duration} ease-in-out #{$delay} infinite;
+    }
+  }
+}
+
+@keyframes tail {
+  0% { width: 0; }
+  30% { width: 100px; }
+  100% { width: 0; }
+}
