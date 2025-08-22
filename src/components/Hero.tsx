@@ -33,8 +33,8 @@ const Hero = () => {
           className="absolute 
                      top-[12%] left-[5%]      /* Posisi responsif */
                      md:top-[25%] md:left-[15%]
-                     lg:top-[170px] lg:left-[220px] /* Posisi asli untuk layar besar */
-                     xl:left-[280px]"
+                     lg:top-[250px] lg:left-[220px] /* Posisi asli untuk layar besar */
+                     xl:left-[90px]"
           drag
           dragConstraints={constraintsRef}
           dragTransition={{ bounceStiffness: 500, bounceDamping: 50 }}
@@ -68,8 +68,8 @@ const Hero = () => {
           className="absolute
                      top-[5%] right-[5%]       /* Posisi responsif */
                      md:top-[10%] md:right-[15%]
-                     lg:top-[20px] lg:right-[180px] /* Posisi asli untuk layar besar */
-                     xl:right-[220px]"
+                     lg:-top-[200px] lg:right-[180px] /* Posisi asli untuk layar besar */
+                     xl:right-[200px]"
           drag
           dragConstraints={constraintsRef}
           dragTransition={{ bounceStiffness: 500, bounceDamping: 50 }}

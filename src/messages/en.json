@@ -4,10 +4,6 @@
     "portfolio": "Portfolio",
     "contact": "Contact Me"
   },
-  "LanguageSwitcher": {
-    "label": "Change Language",
-    "locale": "({locale, select, en {English} id {Indonesia} other {Unknown})"
-  },
   "DownloadCV": {
     "buttonText": "My CV",
     "responsiveButtonText": "CV"
@@ -25,8 +21,8 @@
     "interestsDescription": "Outside of coding, I enjoy photography and hiking"
   },
   "Hero": {
-    "greeting": "Hi, I am",
-    "name": "Dany Prastya",
-    "description": "I am a Frontend Developer who focused on building websites with clean code and provide good experience for users"
+    "greeting": "Transforming Concepts Into",
+    "name": "Seamless User Experiences",
+    "description": "Hi, I Am Dany, A Web Developer Based In Indonesia"
   }
 }

@@ -4,10 +4,6 @@
     "portfolio": "Portofolio",
     "contact": "Hubungi Saya"
   },
-  "LanguageSwitcher": {
-    "label": "Ubah Bahasa",
-    "locale": "({locale, select, en {English} id {Indonesia} other {Unknown})"
-  },
   "DownloadCV": {
     "buttonText": "CV Saya",
     "responsiveButtonText": "CV"
@@ -25,8 +21,8 @@
     "interestsDescription": "Di luar coding, saya menikmati fotografi dan mendaki"
   },
   "Hero": {
-    "greeting": "Hai, saya",
-    "name": "Dany Prastya",
-    "description": "Saya adalah seorang Frontend Developer yang berfokus membangun situs web dengan kode yang bersih dan memberikan pengalaman yang baik bagi pengguna"
+    "greeting": "Transforming Concepts Into",
+    "name": "Seamless User Experiences",
+    "description": "Halo, Saya Dany, Seorang Web Developer"
   }
 }
