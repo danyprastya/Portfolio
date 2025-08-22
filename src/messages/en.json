@@ -1,0 +1,32 @@
+{
+  "Navigation": {
+    "about": "About",
+    "portfolio": "Portfolio",
+    "contact": "Contact Me"
+  },
+  "LanguageSwitcher": {
+    "label": "Change Language",
+    "locale": "({locale, select, en {English} id {Indonesia} other {Unknown})"
+  },
+  "DownloadCV": {
+    "buttonText": "My CV",
+    "responsiveButtonText": "CV"
+  },
+  "About": {
+    "title": "About",
+    "me": "Me",
+    "educationTitle": "Education",
+    "educationDescription": "I hold a degree in Computer Science",
+    "experienceTitle": "Experience",
+    "experienceDescription": "Frontend Developer with 3+ years of experience",
+    "skillsTitle": "Skills",
+    "skillsDescription": "Specializing in React, Next.js, and TypeScript",
+    "interestsTitle": "Interests",
+    "interestsDescription": "Outside of coding, I enjoy photography and hiking"
+  },
+  "Hero": {
+    "greeting": "Hi, I am",
+    "name": "Dany Prastya",
+    "description": "I am a Frontend Developer who focused on building websites with clean code and provide good experience for users"
+  }
+}

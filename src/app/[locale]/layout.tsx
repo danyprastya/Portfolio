@@ -23,4 +23,8 @@ export default async function LocaleLayout({
       </body>
     </html>
   );
+  // return (
+  
+  //       <NextIntlClientProvider>{children}</NextIntlClientProvider>
+  // );
 }
