@@ -77,7 +77,7 @@ const ProjectCard = ({ project }: { project: Project; className?: string }) => {
           <DialogTrigger asChild>
             <motion.div
               className={
-                "relative rounded-xl group cursor-pointer gap-x-10 h-[400px]"
+                "relative rounded-xl aspect-[4/3] group cursor-pointer gap-x-10"
               }
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -100,18 +100,20 @@ const ProjectCard = ({ project }: { project: Project; className?: string }) => {
 
               <div className="absolute bottom-0 left-0 p-6 text-white transform translate-z-2">
                 <CardItem translateZ="500" translateY="-20">
-                  <h3 className="text-2xl text-white font-bold mb-2">{project.title}</h3>
+                  <h3 className="text-md md:text-xl lg:text-2xl xl:text-2xl text-white font-bold mb-2">
+                    {project.title}
+                  </h3>
                 </CardItem>
                 <CardItem translateZ="80" translateX="-30">
                   <motion.div
                     className="flex flex-wrap gap-2"
-                    initial={{ opacity: 1}}
+                    initial={{ opacity: 1 }}
                     whileHover={{ opacity: 1 }}
                   >
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs backdrop-blur-sm px-2 py-1 rounded-full border border-white text-white"
+                        className="text-[8px] md:text-xs lg:text-xs xl:text-[14px] backdrop-blur-sm px-2 py-1 rounded-full border border-white text-white"
                       >
                         {tech}
                       </span>
@@ -125,7 +127,7 @@ const ProjectCard = ({ project }: { project: Project; className?: string }) => {
                 initial={{ scale: 0.8 }}
                 whileHover={{ scale: 1 }}
               >
-                <CardItem as="div" translateZ="10">
+                <CardItem as="div" translateZ="10" className="sm:hidden">
                   <div className="flex items-center gap-2 text-lg font-semibold text-white transform translate-z-3">
                     <PiMouseLeftClickFill size={20} />
                     Click to see more
@@ -233,7 +235,7 @@ const Projects = () => {
           Website hingga IoT
         </motion.p>
 
-        <div className="relative">
+        <div className="relative hidden sm:hidden lg:flex lg:flex-col">
           <div className="overflow-hidden rounded-lg">
             {shouldUseCarousel ? (
               <motion.div
@@ -244,7 +246,7 @@ const Projects = () => {
               >
                 {Array.from({ length: totalSlides }).map((_, slideIndex) => (
                   <div key={slideIndex} className="w-full flex-shrink-0 px-2">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                       {projectsData
                         .slice(
                           slideIndex * itemsPerView,
@@ -254,7 +256,7 @@ const Projects = () => {
                           <ProjectCard
                             key={project.id}
                             project={project}
-                            className="h-[400px]"
+                            className="h-[100px] md:h-[200px] lg:h-[400px] xl:h-[500px]"
                           />
                         ))}
                     </div>
@@ -316,6 +318,13 @@ const Projects = () => {
               </div>
             </>
           )}
+        </div>
+        <div className="flex sm:flex md:hidden aspect-4/3 relative justify-start items-center flex-col mx-auto px-3">
+          <div className="w-full">
+            {projectsData.map((project) => (
+              <ProjectCard key={project.id} project={project} className="rounded-none" />
+            ))}
+          </div>
         </div>
       </div>
     </div>

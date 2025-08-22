@@ -10,8 +10,6 @@ import {
   NavBody,
   NavItems,
   MobileNav,
-  NavbarLogo,
-  NavbarButton,
   MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
@@ -35,7 +33,7 @@ const NavbarPorto = () => {
           <LanguageSwitcher />
           <DownloadCV />
       </NavBody>
-      <MobileNav className="bg-white border border-white">
+      <MobileNav className="bg-black border border-white">
           <MobileNavHeader>
 
             <MobileNavToggle
