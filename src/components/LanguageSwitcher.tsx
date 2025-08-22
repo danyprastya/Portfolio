@@ -38,7 +38,7 @@ export default function LanguageSwitcher() {
         // Semua logika styling sekarang ada di dalam className
         className={`transition-all duration-200 flex items-center gap-2 
                     ${locale === 'id' 
-                      ? 'bg-transparent border' // Gaya jika AKTIF
+                      ? 'bg-transparent border rounded-full' // Gaya jika AKTIF
                       : 'bg-transparent opacity-50' // Gaya jika TIDAK AKTIF (mirip 'outline')
                     }`}
       >
@@ -53,7 +53,7 @@ export default function LanguageSwitcher() {
         onClick={() => handleButtonClick('en')}
         className={`transition-all duration-200 flex items-center gap-2 
                     ${locale === 'en' 
-                      ? 'bg-transparent border border-white' 
+                      ? 'bg-transparent border border-white rounded-full' 
                       : 'bg-transparent opacity-50'
                     }`}
       >

@@ -57,6 +57,8 @@ const ProgressRing = ({ percentage, language }: { percentage: number, language: 
 
 const About = () => {
   const marqueeRef = useRef(null); // Ref untuk batasan drag marquee
+
+
   // Definisikan frameworks/tools dan bahasa pemrograman secara terpisah
   const frameworksAndTools = [
     { name: "React", icon: <SiReact className="mr-2" /> },
@@ -115,6 +117,7 @@ const About = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <AnimatedCharacter/>
+
         </motion.div>
 
         {/* Kolom Kanan: Teks Konten */}
@@ -140,7 +143,7 @@ const About = () => {
           
           {/* Bagian Frameworks & Tools */}
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Frameworks & Tools</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Frameworks & <span className="text-orange-400">Tools</span></h2>
             {/* Kontainer Marquee 2 Baris */}
             <motion.div 
               ref={marqueeRef}
@@ -187,7 +190,7 @@ const About = () => {
 
           {/* Bagian Bahasa Pemrograman */}
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">Bahasa Pemrograman</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">Bahasa <span className="text-orange-400">Pemrograman</span></h2>
             <div className="flex flex-wrap justify-center sm:justify-start gap-4 sm:gap-6">
               {programmingLanguages.map(lang => (
                 <ProgressRing key={lang.name} percentage={lang.percentage} language={lang.name} />
