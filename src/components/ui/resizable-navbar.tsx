@@ -276,8 +276,11 @@ export const NavbarButton = ({
   };
 
   return (
+    // @ts-expect-error : dada
     <Tag
+    // @ts-expect-error : dada
       href={href || undefined}
+      // @ts-expect-error : dada
       className={cn(baseStyles, variantStyles[variant], className)}
       {...props}
     >

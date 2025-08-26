@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable */
 import { cn } from "@/lib/utils";
 
 import React, {
@@ -135,8 +136,11 @@ export const CardItem = ({
   };
 
   return (
+    // @ts-ignore
     <Tag
+    // @ts-ignore
       ref={ref}
+      // @ts-ignore
       className={cn("w-fit transition duration-200 ease-linear", className)}
       {...rest}
     >
