@@ -71,7 +71,6 @@ const About = () => {
     { name: "Framer Motion", icon: <SiFramer className="mr-2" /> },
     { name: "Three.js", icon: <SiThreedotjs className="mr-2" /> },
     { name: "Git", icon: <SiGit className="mr-2" /> },
-    { name: "Figma", icon: <SiFigma className="mr-2" /> },
     { name: "Firebase", icon: <SiFirebase className="mr-2" /> },
   ];
 
