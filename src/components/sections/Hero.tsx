@@ -1,49 +1,115 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
-import { ChevronDown, Download, ExternalLink } from "lucide-react";
+import { ChevronDown, Download, ExternalLink, Mail } from "lucide-react";
 import socialData from "@/data/social.json";
+
+// Counter component - completely isolated with ref to prevent re-renders
+const AnimatedCounter = ({
+  end,
+  suffix = "",
+  duration = 2000,
+  startDelay = 0,
+}: {
+  end: number;
+  suffix?: string;
+  duration?: number;
+  startDelay?: number;
+}) => {
+  const [count, setCount] = useState(0);
+  const hasStartedRef = useRef(false);
+  const animationRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (hasStartedRef.current) return;
+
+    const startAnimation = () => {
+      hasStartedRef.current = true;
+      let startTimestamp: number | undefined;
+
+      const step = (timestamp: number) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4); // Smooth easing
+        setCount(Math.floor(easeOutQuart * end));
+
+        if (progress < 1) {
+          animationRef.current = requestAnimationFrame(step);
+        }
+      };
+
+      animationRef.current = requestAnimationFrame(step);
+    };
+
+    const timeoutId = setTimeout(startAnimation, startDelay);
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [duration, end, startDelay]); // Empty dependency array - runs only once
+
+  return (
+    <span>
+      {count}
+      {suffix}
+    </span>
+  );
+};
 
 const Hero = () => {
   const [displayText, setDisplayText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [currentLineIndex, setCurrentLineIndex] = useState(0);
 
+  // Enhanced code lines with different JavaScript patterns
+  const codeLines = useMemo(
+    () => [
+      "const developer = new FullStackDev();",
+      "developer.skills.push('Innovation');",
+      "developer.build('Amazing Projects');",
+      "// Ready to work together?",
+    ],
+    []
+  );
+
+  // Stats data - completely static
+  const stats = useMemo(
+    () => [
+      { number: 50, label: "Projects Completed", suffix: "+" },
+      { number: 100, label: "Happy Clients", suffix: "+" },
+      { number: 15, label: "Tech Stack", suffix: "+" },
+      { number: 24, label: "Support", suffix: "/7" },
+    ],
+    []
+  );
+
+  // Faster typewriter effect
   useEffect(() => {
-    const texts = [
-      "Full-Stack Developer",
-      "Mobile App Developer",
-      "IoT System Builder",
-      "Data Scientist",
-      "Tech Innovator",
-    ];
-    const currentText = texts[currentIndex];
-    const shouldDelete = isDeleting;
+    if (currentLineIndex >= codeLines.length) return;
+
+    const currentText = codeLines[currentLineIndex];
 
     const timeout = setTimeout(
       () => {
-        if (!shouldDelete && displayText === currentText) {
-          // Pause before deleting
-          setTimeout(() => setIsDeleting(true), 2000);
-        } else if (shouldDelete && displayText === "") {
-          // Move to next text
-          setIsDeleting(false);
-          setCurrentIndex((prev) => (prev + 1) % texts.length);
+        if (displayText === currentText) {
+          // Quick pause before next line
+          setTimeout(() => {
+            setCurrentLineIndex((prev) => prev + 1);
+            setDisplayText("");
+          }, 400); // Reduced from 1500ms to 400ms
         } else {
-          // Type or delete character
-          setDisplayText((prev) =>
-            shouldDelete
-              ? prev.slice(0, -1)
-              : currentText.slice(0, prev.length + 1)
-          );
+          // Fast typing
+          setDisplayText(currentText.slice(0, displayText.length + 1));
         }
       },
-      shouldDelete ? 50 : 100
-    );
+      currentText === "" ? 200 : 30
+    ); // 30ms for typing, 200ms for empty lines
 
     return () => clearTimeout(timeout);
-  }, [displayText, currentIndex, isDeleting]);
+  }, [displayText, currentLineIndex, codeLines]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -57,66 +123,126 @@ const Hero = () => {
       id="hero"
       className="relative flex items-center justify-center min-h-screen overflow-hidden"
     >
-      {/* Content */}
+      {/* Main Content */}
       <div className="relative z-10 container-custom section-padding text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-8"
+          className="space-y-12"
         >
-          {/* Greeting */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-lg sm:text-xl text-muted-foreground"
-          >
-            Hello, I&apos;m
-          </motion.p>
-
-          {/* Name */}
-          <motion.h1
+          {/* Main Title */}
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="heading-xl gradient-text animate-none"
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="space-y-4"
           >
-            {socialData.personal.name}
-          </motion.h1>
+            <h1 className="heading-xl">
+              Building Tomorrow&apos;s
+              <br />
+              <span className="gradient-text">Digital Solutions</span>
+            </h1>
 
-          {/* Typing Animation */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-            className="h-16 sm:h-20 flex items-center justify-center"
-          >
-            <h2 className="heading-lg text-foreground">
-              I&apos;m a{" "}
-              <span className="text-primary font-bold">
-                {displayText}
-                <span className="animate-pulse text-white">|</span>
-              </span>
-            </h2>
+            <p className="body-lg max-w-2xl mx-auto">
+              Transforming ideas into powerful applications across web, mobile,
+              and IoT ecosystems
+            </p>
           </motion.div>
 
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.9 }}
-            className="body-lg max-w-3xl mx-auto leading-relaxed"
+          {/* Terminal Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="max-w-2xl mx-auto"
           >
-            {socialData.personal.bio}
-          </motion.p>
+            <div className="glass rounded-lg overflow-hidden">
+              {/* Terminal Header */}
+              <div className="flex items-center justify-between px-4 py-2 bg-secondary/20 border-b border-border/30">
+                <div className="flex space-x-2">
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <span className="text-sm text-muted-foreground">
+                  ~/portfolio
+                </span>
+              </div>
+
+              {/* Terminal Body */}
+              <div className="p-4 bg-black/50 font-mono text-left space-y-1 min-h-[180px]">
+                {codeLines.map((line, lineIndex) => (
+                  <div key={lineIndex} className="flex items-start space-x-2">
+                    {line.trim() !== "" && (
+                      <span className="text-primary flex-shrink-0">$</span>
+                    )}
+                    <span className="text-green-400 text-sm flex-1">
+                      {lineIndex < currentLineIndex ? (
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: line.replace(
+                              /\/\/(.*)/g,
+                              '<span class="text-gray-500">//$1</span>'
+                            ),
+                          }}
+                        />
+                      ) : lineIndex === currentLineIndex ? (
+                        <>
+                          <span
+                            dangerouslySetInnerHTML={{
+                              __html: displayText.replace(
+                                /\/\/(.*)/g,
+                                '<span class="text-gray-500">//$1</span>'
+                              ),
+                            }}
+                          />
+                          <span className="animate-pulse text-white">|</span>
+                        </>
+                      ) : null}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Stats Section - Isolated from typewriter */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2 }}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto"
+          >
+            {stats.map((stat, statIndex) => (
+              <motion.div
+                key={stat.label} // Simple stable key
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.4 + statIndex * 0.1 }}
+                className="card-base text-center group hover:border-primary/30 transition-all duration-300"
+              >
+                <div className="text-2xl sm:text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
+                  <AnimatedCounter
+                    end={stat.number}
+                    suffix={stat.suffix}
+                    duration={2500}
+                    startDelay={1600 + statIndex * 200} // Staggered start
+                  />
+                </div>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12"
+            transition={{ delay: 1.8 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <button
               onClick={() => scrollToSection("projects")}
@@ -126,13 +252,21 @@ const Hero = () => {
               <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
 
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="btn-secondary group flex items-center gap-2"
+            >
+              <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              Let&apos;s Collaborate
+            </button>
+
             <a
               href={socialData.personal.resume}
               download
-              className="btn-secondary group flex items-center gap-2"
+              className="btn-ghost group flex items-center gap-2"
             >
               <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-              Download Resume
+              Resume
             </a>
           </motion.div>
 
@@ -140,8 +274,8 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.3 }}
-            className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mt-8"
+            transition={{ delay: 2.0 }}
+            className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full"
           >
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
             <span className="text-sm text-muted-foreground">
@@ -154,7 +288,7 @@ const Hero = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
+          transition={{ delay: 2.2 }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         >
           <button

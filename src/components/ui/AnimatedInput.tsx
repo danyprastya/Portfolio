@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SPRING = {
   type: "spring",
   // Damping controls how quickly the spring comes to rest (higher = less oscillation)

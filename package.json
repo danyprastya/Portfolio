@@ -15,6 +15,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-toast": "^1.2.2",
     "@radix-ui/react-tooltip": "^1.2.8",
+    "@tabler/icons-react": "^3.34.1",
     "@types/node": "^22.7.5",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
     "@types/nodemailer": "^7.0.1",
+    "critters": "^0.0.25",
     "eslint": "^9.13.0",
     "eslint-config-next": "^15.0.3"
   }

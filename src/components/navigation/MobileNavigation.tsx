@@ -125,8 +125,8 @@ const MobileNavigation = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         initial={{ scale: 0, opacity: 0 }}
-        // eslint-disable-next-line react/jsx-no-duplicate-props
-        animate={{ scale: 1, opacity: 1 }}
+        // animate={{ scale: 1, opacity: 1 }}
+        // animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 2, duration: 0.3 }}
       >
         <AnimatePresence mode="wait">

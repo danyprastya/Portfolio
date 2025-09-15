@@ -5,7 +5,7 @@ import emailFormSchema, { EmailFormData } from "@/utils/validation/email-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Label } from "@radix-ui/react-label";
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@radix-ui/react-tooltip";
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { Mail, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

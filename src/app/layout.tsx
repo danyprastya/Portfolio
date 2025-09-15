@@ -4,6 +4,7 @@ import "./globals.css";
 import { DockNavigation } from "@/components/navigation/DockNavigation";
 import MobileNavigation from "@/components/navigation/MobileNavigation";
 import { ToastProvider } from "@/components/ui/toast";
+import InitialLoader from "@/components/sections/InitialLoader";
 
 export const metadata: Metadata = {
   title: "Dany Prastya - Full-Stack Developer & Tech Innovator",
@@ -87,6 +88,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#3b82f6" />
       </head>
       <body className={`${inter.variable} ${plusJakarta.variable} antialiased`}>
+        <InitialLoader />
         <div
           className={`${inter.className} min-h-screen w-full relative bg-black`}
         >

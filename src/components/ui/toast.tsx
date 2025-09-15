@@ -124,6 +124,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
       };
       setToasts((prev) => [...prev, newToast]);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 

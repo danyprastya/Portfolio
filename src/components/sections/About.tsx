@@ -2,16 +2,13 @@
 "use client";
 import { cn } from "@/lib/utils";
 import {
-  Sparkles,
   Phone,
-  Mail,
   Music2,
   Github,
   Linkedin,
   Instagram,
   MapPin,
   Clock3,
-  Loader2,
 } from "lucide-react";
 import {
   motion,
@@ -26,31 +23,31 @@ import { TextLoop } from "../ui/text-loop";
 import skillData from "@/data/skills.json";
 import * as SiIcons from "react-icons/si";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+// import {
+//   Dialog,
+//   DialogContent,
+//   DialogDescription,
+//   DialogHeader,
+//   DialogTitle,
+//   DialogTrigger,
+//   DialogFooter,
+// } from "@/components/ui/dialog";
+// import { Input } from "@/components/ui/input";
+// import { Textarea } from "@/components/ui/textarea";
+// import { Label } from "@/components/ui/label";
 import {
   TooltipProvider,
   Tooltip,
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/tooltip";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import emailFormSchema, { EmailFormData } from "@/utils/validation/email-form";
-import { useToast } from "@/components/ui/toast";
-import { BorderTrail } from "@/components/ui/border-trail";
-import AnimatedInput from "@/components/ui/AnimatedInput";
-import FileUpload from "@/components/ui/file-upload";
+// import { useForm } from "react-hook-form";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import emailFormSchema, { EmailFormData } from "@/utils/validation/email-form";
+// import { useToast } from "@/components/ui/toast";
+// import { BorderTrail } from "@/components/ui/border-trail";
+// import AnimatedInput from "@/components/ui/AnimatedInput";
+// import FileUpload from "@/components/ui/file-upload";
 import EnhancedSocialButton from "../ui/social-button";
 import EmailDialog from "../ui/email-button";
 
@@ -227,7 +224,6 @@ const bentoItems: BentoItem[] = [
 ];
 
 // Enhanced Email Dialog Component
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 // const EmailDialog = ({ email }: { email: string }) => {
 //   const [isOpen, setIsOpen] = useState(false);
 //   const { addToast } = useToast();
@@ -791,7 +787,6 @@ const TechStackFeature = ({
           <h3 className="text-base font-semibold mb-3">{group.category}</h3>
           <div className="flex flex-row flex-wrap gap-3 w-full">
             {group.items.map((tech, idx) => {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               const IconComp = (SiIcons as any)[tech.icon];
               return (
                 <motion.div
