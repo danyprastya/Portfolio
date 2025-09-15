@@ -1,0 +1,189 @@
+{
+  "featured": [
+    {
+      "id": "project-1",
+      "title": "E-Commerce Platform with Admin Dashboard",
+      "description": "Full-featured e-commerce solution with real-time inventory management, payment integration, and comprehensive admin dashboard.",
+      "longDescription": "A complete e-commerce ecosystem built with Next.js and Firebase. Features include user authentication, product catalog management, shopping cart, payment processing with Stripe, order tracking, and a powerful admin dashboard with analytics and inventory management.",
+      "category": "Web Development",
+      "tags": ["Next.js", "Firebase", "Stripe", "Tailwind CSS", "TypeScript"],
+      "image": "/projects/ecommerce-preview.jpg",
+      "images": [
+        "/projects/ecommerce-1.jpg",
+        "/projects/ecommerce-2.jpg",
+        "/projects/ecommerce-3.jpg"
+      ],
+      "demoUrl": "https://demo.example.com",
+      "githubUrl": "https://github.com/danyprastya/ecommerce-platform",
+      "status": "Completed",
+      "featured": true,
+      "technologies": [
+        {
+          "name": "Next.js 15",
+          "icon": "nextjs"
+        },
+        {
+          "name": "Firebase",
+          "icon": "firebase"
+        },
+        {
+          "name": "Tailwind CSS",
+          "icon": "tailwind"
+        },
+        {
+          "name": "TypeScript",
+          "icon": "typescript"
+        }
+      ],
+      "highlights": [
+        "Real-time inventory management",
+        "Secure payment processing",
+        "Admin dashboard with analytics",
+        "Mobile-responsive design"
+      ]
+    },
+    {
+      "id": "project-2",
+      "title": "Smart Home IoT Control System",
+      "description": "Arduino-based IoT system for home automation with mobile app control and real-time monitoring.",
+      "longDescription": "An integrated IoT ecosystem that allows users to control home appliances, monitor environmental conditions, and automate daily routines. Built with Arduino, sensors, and a Flutter mobile application with Firebase backend for real-time data synchronization.",
+      "category": "IoT Development",
+      "tags": ["Arduino", "C++", "Flutter", "Firebase", "IoT"],
+      "image": "/projects/iot-preview.jpg",
+      "images": [
+        "/projects/iot-1.jpg",
+        "/projects/iot-2.jpg",
+        "/projects/iot-3.jpg"
+      ],
+      "demoUrl": null,
+      "githubUrl": "https://github.com/danyprastya/smart-home-iot",
+      "status": "Completed",
+      "featured": true,
+      "technologies": [
+        {
+          "name": "Arduino",
+          "icon": "arduino"
+        },
+        {
+          "name": "C++",
+          "icon": "cpp"
+        },
+        {
+          "name": "Flutter",
+          "icon": "flutter"
+        },
+        {
+          "name": "Firebase",
+          "icon": "firebase"
+        }
+      ],
+      "highlights": [
+        "Real-time sensor monitoring",
+        "Mobile app integration",
+        "Automated scheduling",
+        "Energy consumption tracking"
+      ]
+    }
+  ],
+  "regular": [
+    {
+      "id": "project-3",
+      "title": "Company Profile Website",
+      "description": "Modern, responsive company profile with CMS integration and SEO optimization.",
+      "longDescription": "Professional company website built with Next.js featuring dynamic content management, SEO optimization, contact forms, and performance optimization. Includes admin panel for content updates.",
+      "category": "Web Development",
+      "tags": ["Next.js", "Tailwind CSS", "CMS", "SEO"],
+      "image": "/projects/company-preview.jpg",
+      "demoUrl": "https://company-demo.example.com",
+      "githubUrl": "https://github.com/danyprastya/company-profile",
+      "status": "Completed",
+      "featured": false,
+      "technologies": [
+        {
+          "name": "Next.js",
+          "icon": "nextjs"
+        },
+        {
+          "name": "Tailwind CSS",
+          "icon": "tailwind"
+        }
+      ]
+    },
+    {
+      "id": "project-4",
+      "title": "Mobile Expense Tracker",
+      "description": "Flutter-based expense tracking app with data visualization and budget management.",
+      "longDescription": "Personal finance management mobile application with expense categorization, budget tracking, spending analytics, and export functionality. Built with Flutter and local/cloud data synchronization.",
+      "category": "Mobile Development",
+      "tags": ["Flutter", "Firebase", "Data Visualization"],
+      "image": "/projects/expense-preview.jpg",
+      "demoUrl": null,
+      "githubUrl": "https://github.com/danyprastya/expense-tracker",
+      "status": "Completed",
+      "featured": false,
+      "technologies": [
+        {
+          "name": "Flutter",
+          "icon": "flutter"
+        },
+        {
+          "name": "Firebase",
+          "icon": "firebase"
+        }
+      ]
+    },
+    {
+      "id": "project-5",
+      "title": "Sales Data Analysis Dashboard",
+      "description": "Python-based data analysis tool with interactive visualizations and insights.",
+      "longDescription": "Comprehensive sales analytics dashboard built with Python, featuring data processing, statistical analysis, trend prediction, and interactive visualizations using matplotlib and seaborn.",
+      "category": "Data Science",
+      "tags": ["Python", "Pandas", "Matplotlib", "Data Analysis"],
+      "image": "/projects/analytics-preview.jpg",
+      "demoUrl": null,
+      "githubUrl": "https://github.com/danyprastya/sales-analytics",
+      "status": "Completed",
+      "featured": false,
+      "technologies": [
+        {
+          "name": "Python",
+          "icon": "python"
+        },
+        {
+          "name": "Pandas",
+          "icon": "pandas"
+        }
+      ]
+    },
+    {
+      "id": "project-6",
+      "title": "Automated Greenhouse System",
+      "description": "IoT-powered greenhouse monitoring and control system with environmental automation.",
+      "longDescription": "Intelligent greenhouse management system using sensors for temperature, humidity, soil moisture monitoring with automated irrigation, ventilation, and lighting control based on environmental conditions.",
+      "category": "IoT Development",
+      "tags": ["Arduino", "Sensors", "Automation", "C++"],
+      "image": "/projects/greenhouse-preview.jpg",
+      "demoUrl": null,
+      "githubUrl": "https://github.com/danyprastya/automated-greenhouse",
+      "status": "In Progress",
+      "featured": false,
+      "technologies": [
+        {
+          "name": "Arduino",
+          "icon": "arduino"
+        },
+        {
+          "name": "C++",
+          "icon": "cpp"
+        }
+      ]
+    }
+  ],
+  "categories": [
+    "All",
+    "Web Development",
+    "Mobile Development",
+    "IoT Development",
+    "Data Science"
+  ]
+}

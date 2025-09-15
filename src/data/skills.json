@@ -1,0 +1,179 @@
+{
+  "techStack": {
+    "Frontend": [
+      {
+        "name": "React",
+        "icon": "SiReact",
+        "description": "Building modern, interactive user interfaces"
+      },
+      {
+        "name": "Next.js",
+        "icon": "SiNextdotjs",
+        "description": "Full-stack React framework for production applications"
+      },
+      {
+        "name": "TypeScript",
+        "icon": "SiTypescript",
+        "description": "Type-safe JavaScript for scalable applications"
+      },
+      {
+        "name": "Tailwind CSS",
+        "icon": "SiTailwindcss",
+        "description": "Utility-first CSS framework for rapid UI development"
+      }
+    ],
+    "Mobile": [
+      {
+        "name": "Flutter",
+        "icon": "SiFlutter",
+        "description": "Cross-platform mobile app development"
+      },
+      {
+        "name": "Android Studio",
+        "icon": "SiAndroidstudio",
+        "description": "Native Android development and debugging"
+      }
+    ],
+    "Backend": [
+      {
+        "name": "Node.js",
+        "icon": "SiNodedotjs",
+        "description": "JavaScript runtime for server-side development"
+      },
+      {
+        "name": "Firebase",
+        "icon": "SiFirebase",
+        "description": "Backend-as-a-Service platform"
+      }
+    ],
+    "Database": [
+      {
+        "name": "PostgreSQL",
+        "icon": "SiPostgresql",
+        "description": "Document-oriented SQL database"
+      }
+    ],
+    "Cloud & DevOps": [
+      {
+        "name": "Google Cloud",
+        "icon": "SiGooglecloud",
+        "description": "Cloud computing and hosting services"
+      },
+      {
+        "name": "Cloudflare",
+        "icon": "SiCloudflare",
+        "description": "CDN, security, and performance optimization"
+      },
+      {
+        "name": "Git",
+        "icon": "SiGit",
+        "description": "Version control and collaborative development"
+      }
+    ],
+    "Data Science": [
+      {
+        "name": "Python",
+        "icon": "SiPython",
+        "description": "Data analysis and machine learning"
+      }
+    ],
+    "IoT & Hardware": [
+      {
+        "name": "Arduino",
+        "icon": "SiArduino",
+        "description": "Microcontroller programming and prototyping"
+      },
+      {
+        "name": "C++",
+        "icon": "SiCplusplus",
+        "description": "Systems programming and embedded development"
+      }
+    ]
+  },
+  "softSkills": [
+    {
+      "name": "Problem Solving",
+      "description": "Analytical thinking and creative solution development",
+      "icon": "lightbulb"
+    },
+    {
+      "name": "Project Management",
+      "description": "Planning, organizing, and delivering projects on time",
+      "icon": "calendar"
+    },
+    {
+      "name": "Team Collaboration",
+      "description": "Working effectively in cross-functional teams",
+      "icon": "users"
+    },
+    {
+      "name": "Continuous Learning",
+      "description": "Staying updated with latest technologies and trends",
+      "icon": "book"
+    },
+    {
+      "name": "Client Communication",
+      "description": "Understanding requirements and providing clear updates",
+      "icon": "message-circle"
+    },
+    {
+      "name": "Code Review",
+      "description": "Maintaining code quality and best practices",
+      "icon": "code"
+    }
+  ],
+  "services": [
+    {
+      "title": "Web Development",
+      "description": "Full-stack web applications with modern frameworks and responsive design",
+      "icon": "globe",
+      "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      "deliverables": [
+        "Responsive web applications",
+        "E-commerce platforms",
+        "Admin dashboards",
+        "Company profiles",
+        "SEO optimization"
+      ]
+    },
+    {
+      "title": "Mobile App Development",
+      "description": "Cross-platform mobile applications with native performance",
+      "icon": "smartphone",
+      "technologies": ["Flutter", "Android Studio", "Firebase"],
+      "deliverables": [
+        "iOS & Android apps",
+        "Real-time features",
+        "Push notifications",
+        "App store deployment",
+        "Performance optimization"
+      ]
+    },
+    {
+      "title": "IoT Systems",
+      "description": "Smart automation and monitoring systems for various applications",
+      "icon": "cpu",
+      "technologies": ["Arduino", "C++", "Sensors", "Raspberry Pi"],
+      "deliverables": [
+        "Home automation",
+        "Industrial monitoring",
+        "Environmental sensors",
+        "Remote control systems",
+        "Data logging"
+      ]
+    },
+    {
+      "title": "Data Analysis & ML",
+      "description": "Data-driven insights and machine learning solutions",
+      "icon": "bar-chart",
+      "technologies": ["Python", "Pandas", "Matplotlib", "Jupyter"],
+      "deliverables": [
+        "Data visualization",
+        "Statistical analysis",
+        "Predictive modeling",
+        "Business intelligence",
+        "Custom dashboards"
+      ]
+    }
+  ]
+}

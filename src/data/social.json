@@ -1,0 +1,104 @@
+{
+  "personal": {
+    "name": "Dany Prastya",
+    "nickname": "Dany",
+    "title": "Full-Stack Developer & Tech Innovator",
+    "tagline": "Building innovative solutions with modern technologies",
+    "bio": "Passionate computer science student and freelance developer specializing in full-stack web development, mobile applications, IoT systems, and machine learning. I love turning complex problems into simple, beautiful, and intuitive solutions.",
+    "location": "Indonesia",
+    "availability": "Available for freelance projects",
+    "email": "danyprastyaalhakim@gmail.com",
+    "phone": "+62 852-5842-1749",
+    "resume": "/resume/dany-prastya-resume.pdf"
+  },
+  "social": {
+    "github": {
+      "username": "",
+      "url": "",
+      "icon": "github",
+      "label": "GitHub"
+    },
+    "linkedin": {
+      "username": "",
+      "url": "",
+      "icon": "linkedin",
+      "label": "LinkedIn"
+    },
+    "instagram": {
+      "username": "",
+      "url": "",
+      "icon": "instagram",
+      "label": "Instagram"
+    },
+    "tiktok": {
+      "username": "",
+      "url": "",
+      "icon": "tiktok",
+      "label": "TikTok"
+    }
+  },
+  "contact": {
+    "whatsapp": {
+      "number": "085258421749",
+      "url": "https://wa.me/6285258421749",
+      "message": "Hi Dany! I'm interested in discussing a project with you."
+    },
+    "email": {
+      "address": "danyprastyaalhakim@gmail.com",
+      "subject": "Project Inquiry - Portfolio Contact"
+    }
+  },
+  "experience": [
+    {
+      "title": "Freelance Full-Stack Developer",
+      "company": "Self-Employed",
+      "period": "2023 - Present",
+      "description": "Providing web development, mobile app development, and IoT system services to various clients",
+      "achievements": [
+        "Delivered 10+ successful web development projects",
+        "Built mobile applications with 10k+ downloads",
+        "Implemented IoT solutions for smart home automation",
+        "Created data visualization dashboards for business insights"
+      ]
+    },
+    {
+      "title": "Computer Science Student",
+      "company": "University",
+      "period": "2022 - Present",
+      "description": "Pursuing Bachelor's degree in Computer Science with focus on software engineering and emerging technologies",
+      "achievements": [
+        "Maintaining excellent academic performance",
+        "Active in programming competitions",
+        "Leading tech community projects",
+        "Contributing to open-source initiatives"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Computer Science",
+      "school": "University Name",
+      "period": "2022 - Present",
+      "status": "In Progress",
+      "description": "Focusing on software engineering, algorithms, data structures, and modern development practices"
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Client Name",
+      "position": "Position Title",
+      "company": "Company Name",
+      "content": "Dany delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise made the entire development process smooth and efficient.",
+      "rating": 5,
+      "project": "E-Commerce Platform"
+    },
+    {
+      "name": "Client Name 2",
+      "position": "Position Title 2", 
+      "company": "Company Name 2",
+      "content": "Working with Dany on our IoT project was a great experience. He understood our requirements perfectly and delivered a robust solution that has been running flawlessly for months.",
+      "rating": 5,
+      "project": "Smart Home IoT System"
+    }
+  ]
+}

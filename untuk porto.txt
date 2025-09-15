@@ -1,0 +1,13 @@
+untuk porto
+
+section Hero
+
+section About
+
+Section Layanan
+
+section Project
+
+Section Contact
+
+bagian saat ngirim form email loadingnya buat kaya loading bertahap, dari aceternity multi loader
