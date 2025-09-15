@@ -8,7 +8,7 @@ import {
   SunMoon,
 } from "lucide-react";
 
-import { Dock, DockIcon, DockItem, DockLabel } from "@/components/motion-primitives/dock";
+import { Dock, DockIcon, DockItem, DockLabel } from "@/components/ui/dock";
 
 const data = [
   {

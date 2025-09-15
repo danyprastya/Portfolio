@@ -1,63 +1,229 @@
-// app/api/sendEmail/route.ts
-import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { NextResponse } from "next/server"
+import nodemailer from "nodemailer"
 
-// === CONFIG TRANSPORTER ===
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: process.env.SMTP_HOST,
+  port: Number.parseInt(process.env.SMTP_PORT || "587"),
+  secure: process.env.SMTP_SECURE === "true",
   auth: {
-    user: process.env.SMTP_USERNAME, // email admin / pengirim default
-    pass: process.env.SMTP_PASSWORD, // app password gmail
+    user: process.env.SMTP_USERNAME,
+    pass: process.env.SMTP_PASSWORD,
   },
-});
+})
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
-    const { name, email, subject, message } = await req.json();
+    const formData = await request.formData()
 
-    if (!name || !email || !subject || !message) {
-      return NextResponse.json(
-        { error: "All fields are required." },
-        { status: 400 }
-      );
+    const name = formData.get("name") as string
+    const email = formData.get("email") as string
+    const subject = formData.get("subject") as string
+    const message = formData.get("message") as string
+
+    console.log("[v0] API received form data:", { name, email, subject, message })
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const attachments: any[] = []
+    let fileIndex = 0
+
+    // Check for files with pattern attachment_0, attachment_1, etc.
+    while (true) {
+      const file = formData.get(`attachment_${fileIndex}`) as File
+      if (!file) break
+
+      console.log(`[v0] Processing attachment ${fileIndex}:`, file.name, file.size)
+
+      const buffer = await file.arrayBuffer()
+      attachments.push({
+        filename: file.name,
+        content: Buffer.from(buffer),
+        contentType: file.type,
+      })
+
+      fileIndex++
     }
 
-    // === EMAIL 1: Send to Admin ===
-    await transporter.sendMail({
-      from: `"${name}" <${process.env.SMTP_USERNAME}>`, // appears in admin email
-      to: process.env.MAIL_RECEIVER_ADDRESS, // admin inbox
-      replyTo: email, // if admin clicks "reply", it will go to user email
-      subject: `New message from ${name}: ${subject}`,
-      html: `
-        <h3>New message from website:</h3>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Subject:</b> ${subject}</p>
-        <p><b>Message:</b><br/>${message}</p>
-      `,
-    });
+    console.log(`[v0] Total attachments processed: ${attachments.length}`)
 
-    // === EMAIL 2: Confirmation to User ===
-    await transporter.sendMail({
-      from: `"Dany Prastya" <${process.env.SMTP_USERNAME}>`,
-      to: email, // user inbox
-      subject: "Confirmation: Your message has been received",
-      html: `
-        <p>Hello <b>${name}</b>,</p>
-        <p>Thank you for contacting me. Here's a copy of your message:</p>
-        <blockquote>${message}</blockquote>
-        <p>I will reply within 24 hours.</p>
+    const baseStyles = `
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 24px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    background: #f9f9f9;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  td {
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  .card {
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+  .footer {
+    font-size: 13px;
+    color: #888;
+    text-align: center;
+    margin-top: 20px;
+  }
+  /* Dark Mode */
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: #1e1e1e;
+      color: #ddd;
+    }
+    .container {
+      background: #2a2a2a;
+      border: 1px solid #444;
+    }
+    td {
+      background: #333 !important;
+      border: 1px solid #555;
+      color: #ddd;
+    }
+    .card {
+      background: #222;
+      border-left: 4px solid #4da6ff;
+      color: #ddd;
+    }
+    a { color: #4da6ff !important; }
+    .footer { color: #aaa; }
+  }
+`
+
+    const mailOptionsAdmin = {
+  from: process.env.SMTP_USERNAME,
+  to: process.env.MAIL_RECEIVER_ADDRESS,
+  subject: `📩 New Contact Form Message from ${name}`,
+  html: `
+    <html>
+    <head>
+      <style>${baseStyles}</style>
+    </head>
+    <body>
+      <div class="container">
+        <h2>New Contact Form Submission</h2>
+
+        <table>
+          <tr>
+            <td style="font-weight:bold; width:120px;">👤 Name</td>
+            <td>${name}</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold;">📧 Email</td>
+            <td>${email}</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold;">📝 Subject</td>
+            <td>${subject}</td>
+          </tr>
+        </table>
+
+        <div class="card" style="border-left:4px solid #007bff;">
+          <h3>💬 Message:</h3>
+          <p>${message.replace(/\n/g, "<br>")}</p>
+        </div>
+
+        ${attachments.length > 0 
+          ? `<p><strong>📎 Attachments:</strong> ${attachments.length} file${attachments.length !== 1 ? "s" : ""} attached</p>` 
+          : ""}
+
         <hr/>
-        <small>This email was sent automatically, please don't reply directly to this address.</small>
-      `,
-    });
+        <p class="footer">
+          This email was automatically generated by your contact form system.
+        </p>
+      </div>
+    </body>
+    </html>
+  `,
+  attachments,
+}
 
-    return NextResponse.json({ success: true });
-  } catch (err) {
-    console.error("Error sending email:", err);
-    return NextResponse.json(
-      { error: "Failed to send email" },
-      { status: 500 }
-    );
+    const mailOptionsClient = {
+  from: `"Dany Prastya" <${process.env.SMTP_USERNAME}>`,
+  to: email,
+  subject: "✅ Confirmation: Your message has been received",
+  html: `
+    <html>
+    <head>
+      <style>${baseStyles}</style>
+    </head>
+    <body>
+      <div class="container">
+        <h2>Thank You for Reaching Out!</h2>
+
+        <p>Hello <strong>${name}</strong>,</p>
+        <p>
+          We have received your message and will get back to you shortly. 
+          Below is a copy of your submission:
+        </p>
+
+        <table>
+          <tr>
+            <td style="font-weight:bold; width:120px;">📝 Subject</td>
+            <td>${subject}</td>
+          </tr>
+        </table>
+
+        <div class="card" style="border-left:4px solid #28a745;">
+          <h3>💬 Your Message:</h3>
+          <p>${message.replace(/\n/g, "<br>")}</p>
+        </div>
+
+        ${attachments.length > 0 
+          ? `<p><strong>📎 Attachments:</strong> ${attachments.length} file${attachments.length !== 1 ? "s" : ""} attached</p>` 
+          : ""}
+
+        <hr/>
+        <p class="footer">
+          This is an automated confirmation email. Please do not reply directly.<br/>
+          For assistance, contact us at 
+          <a href="mailto:${process.env.MAIL_RECEIVER_ADDRESS}">${process.env.MAIL_RECEIVER_ADDRESS}</a>.
+        </p>
+      </div>
+    </body>
+    </html>
+  `,
+  attachments,
+}
+
+    console.log("[v0] Sending email with options:", {
+      ...mailOptionsAdmin,
+      attachments: attachments.map((a) => ({ filename: a.filename, size: a.content.length })),
+    })
+
+    console.log("[v0] Sending email with options:", {
+      ...mailOptionsClient,
+      attachments: attachments.map((a) => ({ filename: a.filename, size: a.content.length })),
+    })
+
+    await transporter.sendMail(mailOptionsAdmin)
+    console.log("[v0] Email sent successfully")
+
+    await transporter.sendMail(mailOptionsClient)
+    console.log("[v0] Email sent successfully")
+
+    return NextResponse.json({ message: "Email sent successfully" })
+  } catch (error) {
+    console.error("[v0] Error sending email:", error)
+    return NextResponse.json({ error: "Failed to send email" }, { status: 500 })
   }
 }
