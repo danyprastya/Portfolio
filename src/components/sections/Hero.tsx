@@ -60,17 +60,147 @@ const AnimatedCounter = ({
   );
 };
 
+// Syntax Highlighter Component - Fixed
+const SyntaxHighlighter = ({ line }: { line: string }) => {
+  if (line.trim() === "") {
+    return <span>&nbsp;</span>;
+  }
+
+  // Create highlighted segments
+  const highlightSyntax = (text: string) => {
+    // Split into tokens to avoid overlapping replacements
+    const tokens = text.split(
+      /(\s+|[{}[\](),;]|\.|\b(?:const|let|var|function|class|async|await|return|import|export|from|new|this)\b|\/\/.*|'[^']*'|"[^"]*"|`[^`]*`)/
+    );
+
+    return tokens.map((token, index) => {
+      // Skip whitespace
+      if (/^\s+$/.test(token)) {
+        return token;
+      }
+
+      // Keywords (blue)
+      if (
+        /^(const|let|var|function|class|async|await|return|import|export|from|new|this)$/.test(
+          token
+        )
+      ) {
+        return (
+          <span key={index} style={{ color: "#60a5fa", fontWeight: "500" }}>
+            {token}
+          </span>
+        );
+      }
+
+      // Built-in objects (emerald)
+      if (
+        /^(Promise|Array|Object|String|Number|Boolean|console)$/.test(token)
+      ) {
+        return (
+          <span key={index} style={{ color: "#34d399" }}>
+            {token}
+          </span>
+        );
+      }
+
+      // Strings (green)
+      if (/^(['"`].*\1)$/.test(token)) {
+        return (
+          <span key={index} style={{ color: "#86efac" }}>
+            {token}
+          </span>
+        );
+      }
+
+      // Comments (gray, italic)
+      if (/^\/\//.test(token)) {
+        return (
+          <span key={index} style={{ color: "#9ca3af", fontStyle: "italic" }}>
+            {token}
+          </span>
+        );
+      }
+
+      // Method calls - check if next non-whitespace token is (
+      if (token.endsWith(".")) {
+        const nextTokenIndex = tokens.findIndex(
+          (t, i) => i > index && t.trim() !== ""
+        );
+        const nextToken = tokens[nextTokenIndex];
+        if (nextToken && nextToken.endsWith("(")) {
+          const methodName = nextToken.slice(0, -1);
+          tokens[nextTokenIndex] = "("; // Replace the token
+          return (
+            <span key={index}>
+              {token}
+              <span style={{ color: "#fde047" }}>{methodName}</span>
+            </span>
+          );
+        }
+      }
+
+      // Arrow functions (pink)
+      if (token === "=>") {
+        return (
+          <span key={index} style={{ color: "#f472b6" }}>
+            {token}
+          </span>
+        );
+      }
+
+      // Brackets (light gray)
+      if (/^[{}[\](),;]$/.test(token)) {
+        return (
+          <span key={index} style={{ color: "#d1d5db" }}>
+            {token}
+          </span>
+        );
+      }
+
+      // Emojis (larger)
+      if (/^[☕🚀]$/.test(token)) {
+        return (
+          <span key={index} style={{ fontSize: "1.1em" }}>
+            {token}
+          </span>
+        );
+      }
+
+      // Default color for other text
+      return (
+        <span key={index} style={{ color: "#ffffff" }}>
+          {token}
+        </span>
+      );
+    });
+  };
+
+  return <span>{highlightSyntax(line)}</span>;
+};
+
 const Hero = () => {
   const [displayText, setDisplayText] = useState("");
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
 
-  // Enhanced code lines with different JavaScript patterns
+  // Shorter, more concise code lines
   const codeLines = useMemo(
     () => [
-      "const developer = new FullStackDev();",
-      "developer.skills.push('Innovation');",
-      "developer.build('Amazing Projects');",
-      "// Ready to work together?",
+      "// Crafting digital experiences ☕",
+      "class CreativeDeveloper {",
+      "  constructor() {",
+      "    this.stack = ['React', 'Node.js', 'TypeScript'];",
+      "    this.passion = 'Building amazing products';",
+      "  }",
+      "",
+      "  async create(idea) {",
+      "    const magic = await this.design(idea)",
+      "      .then(ui => this.develop(ui))",
+      "      .then(app => this.deploy(app));",
+      "    return magic.launch(); // 🚀",
+      "  }",
+      "}",
+      "",
+      "// Ready to build something amazing?",
     ],
     []
   );
@@ -170,34 +300,34 @@ const Hero = () => {
                 </span>
               </div>
 
-              {/* Terminal Body */}
-              <div className="p-4 bg-black/50 font-mono text-left space-y-1 min-h-[180px]">
+              {/* Enhanced Terminal Body */}
+              <div className="p-4 bg-black font-mono text-left space-y-1 min-h-[320px] backdrop-blur-sm">
                 {codeLines.map((line, lineIndex) => (
-                  <div key={lineIndex} className="flex items-start space-x-2">
-                    {line.trim() !== "" && (
-                      <span className="text-primary flex-shrink-0">$</span>
-                    )}
-                    <span className="text-green-400 text-sm flex-1">
+                  <div
+                    key={lineIndex}
+                    className="flex items-start space-x-3 group"
+                  >
+                    {/* Line numbers for ALL lines including empty ones */}
+                    <span className="text-gray-500 select-none text-xs leading-5 w-6 text-right font-light">
+                      {String(lineIndex + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-sm flex-1 leading-5">
                       {lineIndex < currentLineIndex ? (
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: line.replace(
-                              /\/\/(.*)/g,
-                              '<span class="text-gray-500">//$1</span>'
-                            ),
-                          }}
-                        />
+                        line.trim() === "" ? (
+                          <span>&nbsp;</span>
+                        ) : (
+                          <SyntaxHighlighter line={line} />
+                        )
                       ) : lineIndex === currentLineIndex ? (
                         <>
-                          <span
-                            dangerouslySetInnerHTML={{
-                              __html: displayText.replace(
-                                /\/\/(.*)/g,
-                                '<span class="text-gray-500">//$1</span>'
-                              ),
-                            }}
-                          />
-                          <span className="animate-pulse text-white">|</span>
+                          {displayText.trim() === "" ? (
+                            <span>&nbsp;</span>
+                          ) : (
+                            <SyntaxHighlighter line={displayText} />
+                          )}
+                          <span className="animate-pulse text-blue-400 ml-1 font-bold">
+                            |
+                          </span>
                         </>
                       ) : null}
                     </span>
@@ -277,7 +407,10 @@ const Hero = () => {
             transition={{ delay: 2.0 }}
             className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full"
           >
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <div className="relative">
+              <div className="w-2 h-2 bg-green-500 rounded-full" />
+              <div className="w-2 h-2 absolute inset-0 animate-ping opacity-75 bg-green-500 rounded-full"></div>
+            </div>
             <span className="text-sm text-muted-foreground">
               {socialData.personal.availability}
             </span>

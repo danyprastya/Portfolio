@@ -137,15 +137,15 @@ const EmailDialog = ({ email }: { email: string }) => {
                 className={cn(
                   "w-12 h-12 p-0",
                   "bg-neutral-100/80 dark:bg-neutral-800/80",
-                  "hover:bg-neutral-200/80 dark:hover:bg-neutral-700/80",
-                  "text-neutral-700 dark:text-neutral-300",
+                  "hover:bg-neutral-200/80 dark:hover:bg-red-600",
+                  "text-neutral-700 dark:text-neutral-300 dark:hover:text-white",
                   "border border-neutral-200/60 dark:border-neutral-700/60",
                   "backdrop-blur-sm transition-all duration-300",
                   "rounded-xl",
                   "hover:scale-105"
                 )}
               >
-                <Mail className="w-4 h-4" />
+                <Mail className="w-5 h-5" />
               </Button>
             </DialogTrigger>
           </TooltipTrigger>

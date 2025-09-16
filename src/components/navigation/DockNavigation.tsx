@@ -64,7 +64,7 @@ const data = [
 
 export function DockNavigation() {
   return (
-    <div className="bottom-2 left-1/2 max-w-full md:fixed -translate-x-1/2 z-50">
+    <div className="bottom-2 left-1/2 max-w-full hidden lg:block fixed -translate-x-1/2 z-50">
       <Dock className="items-end pb-3">
         {data.map((item, idx) => (
           <DockItem

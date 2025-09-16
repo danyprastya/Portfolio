@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Menu, 
-  X, 
-  Home, 
-  User, 
-  Code, 
-  Briefcase, 
-  Mail, 
-  FileText 
-} from 'lucide-react';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Menu,
+  X,
+  Home,
+  User,
+  Code,
+  Briefcase,
+  Mail,
+  FileText,
+} from "lucide-react";
 
 interface NavItem {
   id: string;
@@ -21,12 +21,12 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { id: 'hero', label: 'Home', icon: Home, href: '#hero' },
-  { id: 'about', label: 'About', icon: User, href: '#about' },
-  { id: 'skills', label: 'Skills', icon: Code, href: '#skills' },
-  { id: 'projects', label: 'Projects', icon: Briefcase, href: '#projects' },
-  { id: 'resume', label: 'Resume', icon: FileText, href: '#resume' },
-  { id: 'contact', label: 'Contact', icon: Mail, href: '#contact' },
+  { id: "hero", label: "Home", icon: Home, href: "#hero" },
+  { id: "about", label: "About", icon: User, href: "#about" },
+  { id: "skills", label: "Skills", icon: Code, href: "#skills" },
+  { id: "projects", label: "Projects", icon: Briefcase, href: "#projects" },
+  { id: "resume", label: "Resume", icon: FileText, href: "#resume" },
+  { id: "contact", label: "Contact", icon: Mail, href: "#contact" },
 ];
 
 const MobileNavigation = () => {
@@ -35,7 +35,7 @@ const MobileNavigation = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
     setIsOpen(false);
   };
@@ -43,8 +43,8 @@ const MobileNavigation = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const menuItemVariants = {
-    hidden: { 
-      scale: 0, 
+    hidden: {
+      scale: 0,
       opacity: 0,
       rotate: -180,
     },
@@ -75,7 +75,8 @@ const MobileNavigation = () => {
   };
 
   return (
-    <div className="md:hidden fixed bottom-6 right-6 z-50">
+    // Changed from md:hidden to lg:hidden to show only on mobile and small tablets
+    <div className="lg:hidden fixed bottom-6 right-6 z-50">
       {/* Background Overlay */}
       <AnimatePresence>
         {isOpen && (
@@ -83,7 +84,7 @@ const MobileNavigation = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm -z-10"
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm -z-10"
             onClick={() => setIsOpen(false)}
           />
         )}
@@ -102,11 +103,11 @@ const MobileNavigation = () => {
                 animate="visible"
                 exit="exit"
                 onClick={() => scrollToSection(item.id)}
-                className="flex items-center gap-3 bg-card/90 backdrop-blur-md text-card-foreground px-4 py-3 rounded-2xl border border-border/50 hover:border-primary/50 transition-colors group shadow-lg hover:shadow-xl"
+                className="flex items-center gap-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md text-gray-900 dark:text-gray-100 px-4 py-3 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 transition-colors group shadow-lg hover:shadow-xl"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <item.icon className="w-5 h-5 text-primary" />
+                <item.icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 <span className="text-sm font-medium whitespace-nowrap">
                   {item.label}
                 </span>
@@ -119,15 +120,17 @@ const MobileNavigation = () => {
       {/* FAB Button */}
       <motion.button
         variants={fabVariants}
-        animate={isOpen ? "open" : "closed"}
+        animate={{
+          rotate: isOpen ? 45 : 0,
+          scale: 1,
+          opacity: 1,
+        }}
         onClick={toggleMenu}
-        className="w-14 h-14 bg-primary text-primary-foreground rounded-2xl flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow glow-on-hover"
+        className="w-14 h-14 bg-blue-600 text-white rounded-2xl flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow hover:bg-blue-700"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         initial={{ scale: 0, opacity: 0 }}
-        // animate={{ scale: 1, opacity: 1 }}
-        // animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 2, duration: 0.3 }}
+        transition={{ delay: 0, duration: 0.3 }}
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
@@ -161,7 +164,7 @@ const MobileNavigation = () => {
             {navItems.map((_, index) => (
               <motion.div
                 key={index}
-                className="absolute w-px bg-primary/30"
+                className="absolute w-px bg-blue-600/30 dark:bg-blue-400/30"
                 style={{
                   height: (index + 1) * 60,
                   bottom: 0,

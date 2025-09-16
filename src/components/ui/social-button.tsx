@@ -62,7 +62,7 @@ const EnhancedSocialButton = ({
         <Button
           className={cn(
             "h-12 min-w-32 relative",
-            "bg-neutral-100 dark:bg-neutral-800",
+            "bg-neutral-100 dark:bg-neutral-800/80",
             "hover:bg-neutral-200 dark:hover:bg-neutral-700",
             "text-neutral-700 dark:text-neutral-300",
             "border border-neutral-200 dark:border-neutral-700",
@@ -72,7 +72,7 @@ const EnhancedSocialButton = ({
           {...props}
         >
           <span className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-5 h-5" />
             Social Links
           </span>
         </Button>
@@ -99,8 +99,8 @@ const EnhancedSocialButton = ({
               "flex items-center justify-center",
               "bg-neutral-700 dark:bg-neutral-200",
               "text-neutral-100 dark:text-neutral-800",
-              i === 0 && "rounded-l-md",
-              i === 3 && "rounded-r-md",
+              i === 0 && "rounded-l-lg",
+              i === 3 && "rounded-r-lg",
               "border-r border-neutral-600 dark:border-neutral-300 last:border-r-0",
               "outline-none relative overflow-hidden",
               "transition-all duration-200",
