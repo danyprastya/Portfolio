@@ -1,14 +1,7 @@
-import {
-  Activity,
-  Component,
-  HomeIcon,
-  Mail,
-  CircleUser,
-  ScrollText,
-  SunMoon,
-} from "lucide-react";
+import { FolderCode, HeadsetIcon, HomeIcon, CircleUser } from "lucide-react";
 
 import { Dock, DockIcon, DockItem, DockLabel } from "@/components/ui/dock";
+import Link from "next/link";
 
 const data = [
   {
@@ -23,43 +16,43 @@ const data = [
     icon: (
       <CircleUser className="h-full w-full text-neutral-600 dark:text-neutral-300" />
     ),
-    href: "#",
+    href: "#about",
   },
   {
-    title: "Components",
+    title: "Projects",
     icon: (
-      <Component className="h-full w-full text-neutral-600 dark:text-neutral-300" />
+      <FolderCode className="h-full w-full text-neutral-600 dark:text-neutral-300" />
     ),
-    href: "#",
+    href: "#projects",
   },
   {
-    title: "Activity",
+    title: "Contact",
     icon: (
-      <Activity className="h-full w-full text-neutral-600 dark:text-neutral-300" />
+      <HeadsetIcon className="h-full w-full text-neutral-600 dark:text-neutral-300" />
     ),
-    href: "#",
+    href: "#contact",
   },
-  {
-    title: "Change Log",
-    icon: (
-      <ScrollText className="h-full w-full text-neutral-600 dark:text-neutral-300" />
-    ),
-    href: "#",
-  },
-  {
-    title: "Email",
-    icon: (
-      <Mail className="h-full w-full text-neutral-600 dark:text-neutral-300" />
-    ),
-    href: "#",
-  },
-  {
-    title: "Theme",
-    icon: (
-      <SunMoon className="h-full w-full text-neutral-600 dark:text-neutral-300" />
-    ),
-    href: "#",
-  },
+  // {
+  //   title: "Change Log",
+  //   icon: (
+  //     <ScrollText className="h-full w-full text-neutral-600 dark:text-neutral-300" />
+  //   ),
+  //   href: "#",
+  // },
+  // {
+  //   title: "Email",
+  //   icon: (
+  //     <Mail className="h-full w-full text-neutral-600 dark:text-neutral-300" />
+  //   ),
+  //   href: "#",
+  // },
+  // {
+  //   title: "Theme",
+  //   icon: (
+  //     <SunMoon className="h-full w-full text-neutral-600 dark:text-neutral-300" />
+  //   ),
+  //   href: "#",
+  // },
 ];
 
 export function DockNavigation() {
@@ -67,13 +60,15 @@ export function DockNavigation() {
     <div className="bottom-2 left-1/2 max-w-full hidden lg:block fixed -translate-x-1/2 z-50">
       <Dock className="items-end pb-3">
         {data.map((item, idx) => (
-          <DockItem
-            key={idx}
-            className="aspect-square rounded-full hover:bg- bg-gray-200 dark:bg-neutral-800"
-          >
-            <DockLabel>{item.title}</DockLabel>
-            <DockIcon>{item.icon}</DockIcon>
-          </DockItem>
+          <Link key={idx} href={item.href}>
+            <DockItem
+              
+              className="aspect-square rounded-full hover:bg- bg-gray-200 dark:bg-neutral-800"
+            >
+              <DockLabel>{item.title}</DockLabel>
+              <DockIcon>{item.icon}</DockIcon>
+            </DockItem>
+          </Link>
         ))}
       </Dock>
     </div>

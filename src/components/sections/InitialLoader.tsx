@@ -11,19 +11,10 @@ const loadingStates = [
     text: "Loading creative projects...",
   },
   {
-    text: "Setting up development tools...",
-  },
-  {
-    text: "Configuring tech stack...",
-  },
-  {
     text: "Optimizing user experience...",
   },
   {
     text: "Connecting to innovation...",
-  },
-  {
-    text: "Preparing amazing content...",
   },
   {
     text: "Welcome to Dany Prastya's Portfolio!",
@@ -56,7 +47,7 @@ export default function InitialLoader() {
     }
 
     // Auto-hide loader after animation completes
-    const totalDuration = loadingStates.length * 2000; // 2000ms per step
+    const totalDuration = loadingStates.length * 1000; // 2000ms per step
     const timer = setTimeout(() => {
       finishLoading();
     }, totalDuration);

@@ -39,14 +39,6 @@ interface BentoItem {
   icons?: boolean;
   href?: string;
   feature?:
-    // | "chart"
-    // | "counter"
-    // | "code"
-    // | "timeline"
-    // | "spotlight"
-    // | "icons"
-    // | "typing"
-    // | "metrics"
     | "profile" //fitur sendiri
     | "techStack" //fitur sendiri
     | "social" //fitur baru
@@ -87,24 +79,6 @@ interface BentoItem {
     }>;
     highlights: string[];
   };
-  // spotlightItems?: string[];
-  // timeline?: Array<{ year: string; event: string }>;
-  // code?: string;
-  // codeLang?: string;
-  // typingText?: string;
-  // metrics?: Array<{
-  //   label: string;
-  //   value: number;
-  //   suffix?: string;
-  //   color?: string;
-  // }>;
-  // statistic?: {
-  //   value: string;
-  //   label: string;
-  //   start?: number;
-  //   end?: number;
-  //   suffix?: string;
-  // };
   size?: "sm" | "md" | "lg";
   className?: string;
 }
@@ -122,7 +96,7 @@ const bentoItems: BentoItem[] = [
       description: (
         <>
           I&apos;m a passionate computer science student and freelance developer
-          with <strong>3+ years of experience</strong> specializing in{" "}
+          with <strong>2+ years of experience</strong> specializing in{" "}
           <strong>full-stack web development</strong>,{" "}
           <strong>mobile applications</strong>, <strong>IoT systems</strong>,
           <strong>data analyst</strong>, and <strong>machine learning</strong>.
@@ -133,7 +107,6 @@ const bentoItems: BentoItem[] = [
         "Mobile App Developer",
         "IoT System Builder",
         "Data analyst",
-        "Tech Innovator",
       ],
     },
     size: "md",
@@ -210,15 +183,15 @@ const bentoItems: BentoItem[] = [
       stats: [
         {
           label: "Projects Completed",
-          value: 50,
+          value: 10,
           suffix: "+",
           color: "#10b981",
         },
-        { label: "Years Experience", value: 3, suffix: "+", color: "#3b82f6" },
-        { label: "Happy Clients", value: 25, suffix: "+", color: "#f59e0b" },
+        { label: "Years Experience", value: 2, suffix: "+", color: "#3b82f6" },
+        { label: "Happy Clients", value: 15, suffix: "+", color: "#f59e0b" },
         {
           label: "Technologies Mastered",
-          value: 20,
+          value: 15,
           suffix: "+",
           color: "#8b5cf6",
         },
@@ -234,18 +207,6 @@ const bentoItems: BentoItem[] = [
     size: "md",
     className: "col-span-1 row-span-1",
   },
-  // {
-  //   id: "stat1",
-  //   title: "AI Agents & Automation",
-  //   description:
-  //     "Intelligent agents that learn, adapt, and automate complex workflows",
-  //   href: "#",
-  //   feature: "typing",
-  //   typingText:
-  //     "const createAgent = async () => {\n  const agent = new AIAgent({\n    model: 'gpt-4-turbo',\n    tools: [codeAnalysis, dataProcessing],\n    memory: new ConversationalMemory()\n  });\n\n  // Train on domain knowledge\n  await agent.learn(domainData);\n\n  return agent;\n};",
-  //   size: "md",
-  //   className: "col-span-2 row-span-1 col-start-1 col-end-3",
-  // },
 ];
 
 // Social and Contact Feature Component
@@ -471,7 +432,7 @@ const AchievementFeature = ({
       </div>
 
       {/* Highlights */}
-      <div className="space-y-3">
+      {/* <div className="space-y-3">
         <h4 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
           Key Highlights
         </h4>
@@ -489,7 +450,7 @@ const AchievementFeature = ({
             </motion.div>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -507,9 +468,19 @@ const Profile = ({
   return (
     <div className="pt-2 relative">
       <div className="grid grid-flow-col justify-center items-center grid-rows-3 gap-4 ">
-        <div className="row-span-3 justify-center items-center flex relative w-full h-full">
+        <motion.div
+          className="row-span-3 justify-center items-center flex relative w-full h-full"
+          animate={{
+            y: [0, -15, 0],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
           <Image src={profile.imageUrl} alt="profil" width={130} height={130} />
-        </div>
+        </motion.div>
         <div className="leading-tight col-span-2 gap-2">
           <h3 className="">{profile.title}</h3>
 
@@ -571,37 +542,11 @@ const TechStackFeature = ({
   const categories = [...techStack.map((group) => group.category)];
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-        }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !hasAnimated) {
+        setHasAnimated(true);
       }
-      //     // Animate counters
-      //     achievements.stats.forEach((stat, index) => {
-      //       const duration = 2000;
-      //       const steps = 60;
-      //       const increment = stat.value / steps;
-      //       let current = 0;
-
-      //       const timer = setInterval(() => {
-      //         current += increment;
-      //         if (current >= stat.value) {
-      //           current = stat.value;
-      //           clearInterval(timer);
-      //         }
-
-      //         setCounters((prev) => {
-      //           const newCounters = [...prev];
-      //           newCounters[index] = Math.floor(current);
-      //           return newCounters;
-      //         });
-      //       }, duration / steps);
-      //     });
-      //   }
-      // },
-      // { threshold: 0.3 }
-    );
+    });
 
     if (containerRef.current) {
       observer.observe(containerRef.current);
@@ -697,52 +642,6 @@ const TechStackFeature = ({
   );
 };
 
-// const TypingCodeFeature = ({ text }: { text: string }) => {
-//   const [displayedText, setDisplayedText] = useState("");
-//   const [currentIndex, setCurrentIndex] = useState(0);
-//   const terminalRef = useRef<HTMLDivElement>(null);
-
-//   useEffect(() => {
-//     if (currentIndex < text.length) {
-//       const timeout = setTimeout(() => {
-//         setDisplayedText((prev) => prev + text[currentIndex]);
-//         setCurrentIndex((prev) => prev + 1);
-
-//         if (terminalRef.current) {
-//           terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
-//         }
-//       }, Math.random() * 30 + 10); // Random typing speed for realistic effect
-
-//       return () => clearTimeout(timeout);
-//     }
-//   }, [currentIndex, text]);
-
-//   // Reset animation when component unmounts and remounts
-//   useEffect(() => {
-//     setDisplayedText("");
-//     setCurrentIndex(0);
-//   }, []);
-
-//   return (
-//     <div className="mt-3 relative">
-//       <div className="flex items-center gap-2 mb-2">
-//         <div className="text-xs text-neutral-500 dark:text-neutral-400">
-//           server.ts
-//         </div>
-//       </div>
-//       <div
-//         ref={terminalRef}
-//         className="bg-neutral-900 dark:bg-black text-neutral-100 p-3 rounded-md text-xs font-mono h-[150px] overflow-y-auto"
-//       >
-//         <pre className="whitespace-pre-wrap">
-//           {displayedText}
-//           <span className="animate-pulse">|</span>
-//         </pre>
-//       </div>
-//     </div>
-//   );
-// };
-
 const BentoCard = ({ item }: { item: BentoItem }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isHovered, setIsHovered] = useState(false);
@@ -834,10 +733,6 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
             {item.feature === "social" && item.social && (
               <SocialAndContact social={item.social} />
             )}
-
-            {/* {item.feature === "typing" && item.typingText && (
-              <TypingCodeFeature text={item.typingText} />
-            )} */}
 
             {item.feature === "achievements" && item.achievements && (
               <AchievementFeature achievements={item.achievements} />

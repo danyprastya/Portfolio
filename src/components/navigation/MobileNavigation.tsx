@@ -7,10 +7,8 @@ import {
   X,
   Home,
   User,
-  Code,
   Briefcase,
   Mail,
-  FileText,
 } from "lucide-react";
 
 interface NavItem {
@@ -21,11 +19,9 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { id: "hero", label: "Home", icon: Home, href: "#hero" },
+  { id: "hero", label: "Home", icon: Home, href: "#" },
   { id: "about", label: "About", icon: User, href: "#about" },
-  { id: "skills", label: "Skills", icon: Code, href: "#skills" },
   { id: "projects", label: "Projects", icon: Briefcase, href: "#projects" },
-  { id: "resume", label: "Resume", icon: FileText, href: "#resume" },
   { id: "contact", label: "Contact", icon: Mail, href: "#contact" },
 ];
 

@@ -226,7 +226,7 @@
   }
   
   .card-project {
-    @apply card-interactive group overflow-hidden;
+    @apply card-interactive overflow-hidden;
   }
   
   /* Skill badge */

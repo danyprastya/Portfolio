@@ -60,7 +60,7 @@ const AnimatedCounter = ({
   );
 };
 
-// Syntax Highlighter Component - Fixed
+// Syntax Highlighter Component - Fixed with proper whitespace handling
 const SyntaxHighlighter = ({ line }: { line: string }) => {
   if (line.trim() === "") {
     return <span>&nbsp;</span>;
@@ -74,9 +74,13 @@ const SyntaxHighlighter = ({ line }: { line: string }) => {
     );
 
     return tokens.map((token, index) => {
-      // Skip whitespace
+      // Preserve whitespace including leading spaces for indentation
       if (/^\s+$/.test(token)) {
-        return token;
+        return (
+          <span key={index} style={{ whiteSpace: "pre" }}>
+            {token}
+          </span>
+        );
       }
 
       // Keywords (blue)
@@ -158,7 +162,7 @@ const SyntaxHighlighter = ({ line }: { line: string }) => {
       }
 
       // Emojis (larger)
-      if (/^[☕🚀]$/.test(token)) {
+      if (/^[â˜•ðŸš€]$/.test(token)) {
         return (
           <span key={index} style={{ fontSize: "1.1em" }}>
             {token}
@@ -175,20 +179,20 @@ const SyntaxHighlighter = ({ line }: { line: string }) => {
     });
   };
 
-  return <span>{highlightSyntax(line)}</span>;
+  return <span style={{ whiteSpace: "pre" }}>{highlightSyntax(line)}</span>;
 };
 
 const Hero = () => {
   const [displayText, setDisplayText] = useState("");
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
 
-  // Shorter, more concise code lines
+  // Shorter, more concise code lines dengan indentasi yang proper
   const codeLines = useMemo(
     () => [
       "// Crafting digital experiences ☕",
       "class CreativeDeveloper {",
       "  constructor() {",
-      "    this.stack = ['React', 'Node.js', 'TypeScript'];",
+      "    this.developer = ['Dany', 'Prastya', 'Al-Hakim'];",
       "    this.passion = 'Building amazing products';",
       "  }",
       "",
@@ -208,8 +212,8 @@ const Hero = () => {
   // Stats data - completely static
   const stats = useMemo(
     () => [
-      { number: 50, label: "Projects Completed", suffix: "+" },
-      { number: 100, label: "Happy Clients", suffix: "+" },
+      { number: 10, label: "Projects Completed", suffix: "+" },
+      { number: 15, label: "Happy Clients", suffix: "+" },
       { number: 15, label: "Tech Stack", suffix: "+" },
       { number: 24, label: "Support", suffix: "/7" },
     ],
@@ -311,7 +315,10 @@ const Hero = () => {
                     <span className="text-gray-500 select-none text-xs leading-5 w-6 text-right font-light">
                       {String(lineIndex + 1).padStart(2, "0")}
                     </span>
-                    <span className="text-sm flex-1 leading-5">
+                    <span
+                      className="text-sm flex-1 leading-5"
+                      style={{ whiteSpace: "pre" }}
+                    >
                       {lineIndex < currentLineIndex ? (
                         line.trim() === "" ? (
                           <span>&nbsp;</span>
