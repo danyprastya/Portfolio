@@ -5,7 +5,7 @@
       "name": "Gamplong Studio",
       "category": "Website",
       "image": "/projects/gamplong.png",
-      "description": "Full-featured e-commerce solution with real-time inventory management, payment integration using Stripe, comprehensive admin dashboard with analytics, product management system, and customer relationship tools. Built with Next.js, TypeScript, and PostgreSQL for optimal performance and scalability.",
+      "description": "Comprehensive management system for Gamplong Studio tourism site in Yogyakarta featuring dynamic dashboard for monitoring studio equipment rentals and visitor analytics. Includes real-time asset tracking, visitor management, booking system, and detailed reporting for tourism operations.",
       "githubUrl": "https://github.com/lokacraft/arthaloka-gamplongstudio.git",
       "websiteUrl": "https://gamplongstudio.vercel.app/",
       "technologies": ["Next.js", "TypeScript", "PostgreSQL", "Stripe", "Tailwind CSS"]
@@ -15,7 +15,7 @@
       "name": "PT. Nadhif Putra Sejahtera",
       "category": "Website",
       "image": "/projects/nadhif.png",
-      "description": "Modern, responsive company profile with headless CMS integration, SEO optimization, multi-language support, and dynamic content management. Features include blog system, team showcase, service portfolio, and contact forms with email automation.",
+      "description": "Modern construction company profile website with comprehensive heavy equipment rental catalog, dynamic dashboard management, and integrated contact forms. Features include equipment availability tracking, rental booking system, project portfolio showcase, and admin panel for inventory management.",
       "githubUrl": "https://github.com/lokacraft/arthaloka-ptnadhif.git",
       "websiteUrl": "https://ptnadhifputrasejahtera.vercel.app",
       "technologies": ["Next.js", "Sanity CMS", "React", "GSAP", "Framer Motion"]
@@ -25,7 +25,7 @@
       "name": "Rumah Struktur",
       "category": "Website",
       "image": "/projects/rumahstruktur.png",
-      "description": "Interactive portfolio dashboard with dynamic content management, real-time analytics integration, project showcase with filtering, skill visualization, and visitor tracking. Includes dark/light theme support and responsive design.",
+      "description": "Professional construction company profile website showcasing comprehensive structural engineering services. Features detailed service portfolio, project gallery, team expertise showcase, client testimonials, and integrated contact forms for project inquiries and consultations.",
       "githubUrl": "https://github.com/lokacraft/arthaloka-rumahstruktur.git",
       "websiteUrl": "https://arthaloka-rumahstruktur.vercel.app/",
       "technologies": ["React", "Chart.js", "Firebase", "Material-UI", "Node.js"]
@@ -35,7 +35,7 @@
       "name": "Pertenunan Astiti",
       "category": "Website",
       "image": "/projects/astiti.png",
-      "description": "Flutter-based expense tracking app with intuitive data visualization, budget management, category-wise spending analysis, recurring transaction support, and cloud synchronization. Features include receipt scanning, spending alerts, and financial goal tracking.",
+      "description": "Machine learning-powered traditional weaving website that educates visitors about various types of traditional Indonesian fabrics. Features AI-driven fabric recommendation system where users can input personal preferences and receive ML-based predictions for suitable fabric types, complete with detailed fabric information and cultural significance.",
       "githubUrl": "https://github.com/lokacraft/arthaloka-tenunastiti.git",
       "websiteUrl": "https://pertenunanastiti.vercel.app/",
       "technologies": ["Flutter", "Firebase", "SQLite", "Chart.js", "Provider"]
@@ -45,7 +45,7 @@
       "name": "Triandi Kreasi Utama",
       "category": "Website",
       "image": "/projects/triandi.png",
-      "description": "Comprehensive fitness tracking mobile application with workout planning, progress monitoring, nutrition tracking, and social features. Includes exercise library, custom workout builder, progress photos, and integration with wearable devices.",
+      "description": "Professional construction company profile website highlighting comprehensive building and infrastructure services. Features complete service portfolio, construction project showcase, company expertise overview, client success stories, and integrated contact forms for project consultations and estimates.",
       "githubUrl": "https://github.com/danyprastya/website-triandi-kreasi-utama.git",
       "websiteUrl": "https://website-triandi-kreasi-utama.vercel.app/",
       "technologies": ["React Native", "Redux", "Firebase", "HealthKit", "Google Fit"]
@@ -55,7 +55,7 @@
       "name": "Arthaloka Technology",
       "category": "Website",
       "image": "/projects/arthaloka.png",
-      "description": "On-demand food delivery mobile app with real-time order tracking, payment integration, restaurant discovery, user reviews and ratings system. Features include push notifications, location-based services, and multi-language support.",
+      "description": "Corporate profile website for a technology company specializing in SaaS solutions and custom software development. Showcases comprehensive services including website development, mobile applications, IoT systems, and various software solutions with detailed service portfolios and client case studies.",
       "githubUrl": "https://github.com/lokacraft/lokacraft-official-website.git",
       "websiteUrl": "https://www.arthaloka.tech",
       "technologies": ["Flutter", "Google Maps API", "Stripe", "Firebase", "WebSocket"]
@@ -65,7 +65,7 @@
       "name": "Aquadex",
       "category": "IoT",
       "image": "/projects/aquadex.png",
-      "description": "Arduino-based IoT system for home automation with mobile app control, real-time monitoring, voice control integration, and energy consumption tracking. Supports multiple sensors, smart lighting, temperature control, and security features.",
+      "description": "Complete IoT water quality monitoring system with comprehensive web dashboard for real-time water cleanliness assessment. Monitors water turbidity and pH levels with automated alerts, historical data tracking, water quality analytics, and remote monitoring capabilities for ensuring safe water standards.",
       "githubUrl": "https://github.com/danyprastya/smart-home-iot",
       "websiteUrl": "https://github.com/danyprastya/smart-home-iot",
       "technologies": ["Arduino", "ESP32", "MQTT", "React Native", "Firebase"]
