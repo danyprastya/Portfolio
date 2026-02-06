@@ -213,7 +213,7 @@ const Hero = () => {
   const stats = useMemo(
     () => [
       { number: 10, label: "Projects Completed", suffix: "+" },
-      { number: 15, label: "Happy Clients", suffix: "+" },
+      { number: 10, label: "Happy Clients", suffix: "+" },
       { number: 15, label: "Tech Stack", suffix: "+" },
       { number: 24, label: "Support", suffix: "/7" },
     ],
