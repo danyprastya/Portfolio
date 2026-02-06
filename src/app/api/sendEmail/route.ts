@@ -170,16 +170,22 @@ export async function POST(request: Request) {
     `
 
     // Send admin notification email
+    // Note: For Resend free tier without verified domain, 'from' must be 'onboarding@resend.dev'
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev"
+    
     console.log("[Contact] Sending admin notification email...")
+    console.log("[Contact] Using from email:", fromEmail)
+    console.log("[Contact] Sending to:", process.env.MAIL_RECEIVER_ADDRESS)
+    
     const adminResult = await resend.emails.send({
-      from: `Portfolio Contact <${process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev"}>`,
-      to: process.env.MAIL_RECEIVER_ADDRESS,
-      subject: `📧 New Contact: ${subject} - from ${name}`,
+      from: fromEmail,
+      to: process.env.MAIL_RECEIVER_ADDRESS as string,
+      subject: `New Contact: ${subject} - from ${name}`,
       html: adminEmailHTML,
-      attachments: attachments.map(att => ({
+      attachments: attachments.length > 0 ? attachments.map(att => ({
         filename: att.filename,
         content: att.content,
-      })),
+      })) : undefined,
     })
 
     if (adminResult.error) {
@@ -189,11 +195,11 @@ export async function POST(request: Request) {
     console.log("[Contact] Admin email sent successfully:", adminResult.data?.id)
 
     // Send client confirmation email
-    console.log("[Contact] Sending client confirmation email...")
+    console.log("[Contact] Sending client confirmation email to:", email)
     const clientResult = await resend.emails.send({
-      from: `Dany Prastya <${process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev"}>`,
+      from: fromEmail,
       to: email,
-      subject: `✅ Message Received: ${subject}`,
+      subject: `Message Received: ${subject}`,
       html: clientEmailHTML,
     })
 
