@@ -171,7 +171,7 @@ export async function POST(request: Request) {
 
     // Send admin notification email
     // Note: For Resend free tier without verified domain, 'from' must be 'onboarding@resend.dev'
-    const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev"
+    const fromEmail ="onboarding@resend.dev"
     
     console.log("[Contact] Sending admin notification email...")
     console.log("[Contact] Using from email:", fromEmail)

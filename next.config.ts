@@ -1,10 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable static export for optimal performance
-  output: 'export',
-  trailingSlash: true,
+  // Remove 'output: export' to enable API routes on Vercel
+  // API routes require server-side rendering
   
-  // Image optimization for static export
+  // Image optimization
   images: {
     unoptimized: true,
   },
