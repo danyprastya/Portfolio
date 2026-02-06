@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://danyprastya.dev"), // Update with your actual domain
+  metadataBase: new URL("https://danyportofolio.vercel.app"), // Update with your actual domain
   alternates: {
     canonical: "/",
   },
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title: "Dany Prastya - Full-Stack Developer & Tech Innovator",
     description:
       "Passionate full-stack developer specializing in web development, mobile apps, IoT systems, and machine learning.",
-    url: "https://danyprastya.dev",
+    url: "https://danyportofolio.vercel.app",
     siteName: "Dany Prastya Portfolio",
     locale: "en_US",
     type: "website",
