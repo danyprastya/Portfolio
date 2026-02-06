@@ -176,10 +176,14 @@ export async function POST(request: Request) {
     console.log("[Contact] Sending admin notification email...")
     console.log("[Contact] Using from email:", fromEmail)
     console.log("[Contact] Sending to:", process.env.MAIL_RECEIVER_ADDRESS)
+    console.log("[Contact] Reply-to (client email):", email)
     
+    // Send email TO you (admin), with reply-to set to client's email
+    // When you click "Reply" in your inbox, it will reply to the client!
     const adminResult = await resend.emails.send({
       from: fromEmail,
       to: process.env.MAIL_RECEIVER_ADDRESS as string,
+      replyTo: email, // This is the client's email - when you reply, it goes to them!
       subject: `New Contact: ${subject} - from ${name}`,
       html: adminEmailHTML,
       attachments: attachments.length > 0 ? attachments.map(att => ({
@@ -194,11 +198,12 @@ export async function POST(request: Request) {
     }
     console.log("[Contact] Admin email sent successfully:", adminResult.data?.id)
 
-    // Send client confirmation email
+    // Send confirmation email TO the client
     console.log("[Contact] Sending client confirmation email to:", email)
     const clientResult = await resend.emails.send({
       from: fromEmail,
       to: email,
+      replyTo: process.env.MAIL_RECEIVER_ADDRESS as string, // If client replies, it goes to you
       subject: `Message Received: ${subject}`,
       html: clientEmailHTML,
     })
