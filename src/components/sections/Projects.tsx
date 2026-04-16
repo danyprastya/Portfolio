@@ -114,22 +114,9 @@ const Projects = () => {
           <h2 className="heading-lg mb-4 gradient-text-static">
             Featured Projects
           </h2>
-          {/* <p className="body-lg max-w-3xl mx-auto">
-            A curated selection of web, mobile and IoT projects. Click to expand
-            for details.
-          </p> */}
           <p className="body-lg max-w-3xl mx-auto">
             A curated selection of projects. Click to expand for details.
           </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-8"
-        >
-          {/* <GitHubHeatmap /> */}
         </motion.div>
 
         <motion.div className="mb-6 space-y-6">

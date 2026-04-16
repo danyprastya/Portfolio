@@ -21,21 +21,9 @@ const EnhancedSocialButton = ({
     {
       icon: Linkedin,
       label: "LinkedIn",
-      url: "https://www.linkedin.com/in/dany-prastya-al-hakim-9b181428b",
+      url: "https://www.linkedin.com/in/danyprastya",
       color: "hover:bg-blue-600 hover:text-white",
-    },
-    {
-      icon: Instagram,
-      label: "Instagram",
-      url: "https://instagram.com/danyhkm_",
-      color: "hover:bg-pink-500 hover:text-white",
-    },
-    {
-      icon: Music2,
-      label: "Tiktok",
-      url: "https://tiktok.com/dnyhkm",
-      color: "hover:bg-gray-700 hover:text-white",
-    },
+    }
   ];
 
   const handleShare = (index: number, url: string) => {
@@ -100,7 +88,7 @@ const EnhancedSocialButton = ({
               "bg-neutral-700 dark:bg-neutral-200",
               "text-neutral-100 dark:text-neutral-800",
               i === 0 && "rounded-l-lg",
-              i === 3 && "rounded-r-lg",
+              i === 1 && "rounded-r-lg",
               "border-r border-neutral-600 dark:border-neutral-300 last:border-r-0",
               "outline-none relative overflow-hidden",
               "transition-all duration-200",

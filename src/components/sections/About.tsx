@@ -608,7 +608,7 @@ const TechStackFeature = ({
         </div>
       ))}
       {/* Progress Skills Bar (Optional Enhancement) */}
-      <div className="space-y-3">
+      {/* <div className="space-y-3">
         <h4 className="text-base font-semibold text-neutral-800 dark:text-neutral-200">
           Expertise Level
         </h4>
@@ -637,7 +637,7 @@ const TechStackFeature = ({
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

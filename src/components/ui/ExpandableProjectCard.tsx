@@ -103,7 +103,9 @@ export function ExpandableProjectCard({ project, className }: ExpandableProjectC
             {/* FOOTER */}
             {isExpanded && (
               <ExpandableContent preset="slide-up">
-                <ExpandableCardFooter className="flex justify-start gap-2 items-center py-2 sm:py-4">
+                <ExpandableCardFooter className="flex justify-start items-center py-2 sm:py-4">
+                  <div className="flex justify-start items-center gap-2 pb-2 sm:pb-4">
+
                   <Button
                     variant="outline"
                     asChild
@@ -123,6 +125,7 @@ export function ExpandableProjectCard({ project, className }: ExpandableProjectC
                       Visit Site
                     </Link>
                   </Button>
+                  </div>
                 </ExpandableCardFooter>
               </ExpandableContent>
             )}

@@ -57,7 +57,7 @@
       "image": "/projects/arthaloka.png",
       "description": "Corporate profile website for a technology company specializing in SaaS solutions and custom software development. Showcases comprehensive services including website development, mobile applications, IoT systems, and various software solutions with detailed service portfolios and client case studies.",
       "githubUrl": "https://github.com/lokacraft/lokacraft-official-website.git",
-      "websiteUrl": "https://www.arthaloka.tech",
+      "websiteUrl": "https://www.arthaloka.technology",
       "technologies": ["Flutter", "Google Maps API", "Stripe", "Firebase", "WebSocket"]
     },
     {
@@ -66,8 +66,8 @@
       "category": "IoT",
       "image": "/projects/aquadex.png",
       "description": "Complete IoT water quality monitoring system with comprehensive web dashboard for real-time water cleanliness assessment. Monitors water turbidity and pH levels with automated alerts, historical data tracking, water quality analytics, and remote monitoring capabilities for ensuring safe water standards.",
-      "githubUrl": "https://github.com/danyprastya/smart-home-iot",
-      "websiteUrl": "https://github.com/danyprastya/smart-home-iot",
+      "githubUrl": "https://github.com/Luxlon/Aquadex.git",
+      "websiteUrl": "https://aquadex-six.vercel.app",
       "technologies": ["Arduino", "ESP32", "MQTT", "React Native", "Firebase"]
     }
   ],
