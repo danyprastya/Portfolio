@@ -70,7 +70,7 @@ const SyntaxHighlighter = ({ line }: { line: string }) => {
   const highlightSyntax = (text: string) => {
     // Split into tokens to avoid overlapping replacements
     const tokens = text.split(
-      /(\s+|[{}[\](),;]|\.|\b(?:const|let|var|function|class|async|await|return|import|export|from|new|this)\b|\/\/.*|'[^']*'|"[^"]*"|`[^`]*`)/
+      /(\s+|[{}[\](),;]|\.|\b(?:const|let|var|function|class|async|await|return|import|export|from|new|this)\b|\/\/.*|'[^']*'|"[^"]*"|`[^`]*`)/,
     );
 
     return tokens.map((token, index) => {
@@ -86,7 +86,7 @@ const SyntaxHighlighter = ({ line }: { line: string }) => {
       // Keywords (blue)
       if (
         /^(const|let|var|function|class|async|await|return|import|export|from|new|this)$/.test(
-          token
+          token,
         )
       ) {
         return (
@@ -128,7 +128,7 @@ const SyntaxHighlighter = ({ line }: { line: string }) => {
       // Method calls - check if next non-whitespace token is (
       if (token.endsWith(".")) {
         const nextTokenIndex = tokens.findIndex(
-          (t, i) => i > index && t.trim() !== ""
+          (t, i) => i > index && t.trim() !== "",
         );
         const nextToken = tokens[nextTokenIndex];
         if (nextToken && nextToken.endsWith("(")) {
@@ -206,7 +206,7 @@ const Hero = () => {
       "",
       "// Scroll to know more about me!",
     ],
-    []
+    [],
   );
 
   // Stats data - completely static
@@ -217,7 +217,7 @@ const Hero = () => {
       { number: 15, label: "Tech Stack", suffix: "+" },
       { number: 24, label: "Support", suffix: "/7" },
     ],
-    []
+    [],
   );
 
   // Faster typewriter effect
@@ -239,7 +239,7 @@ const Hero = () => {
           setDisplayText(currentText.slice(0, displayText.length + 1));
         }
       },
-      currentText === "" ? 200 : 30
+      currentText === "" ? 200 : 30,
     ); // 30ms for typing, 200ms for empty lines
 
     return () => clearTimeout(timeout);
@@ -257,6 +257,37 @@ const Hero = () => {
       id="hero"
       className="relative flex items-center justify-center min-h-screen overflow-hidden"
     >
+      {/* Background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-[20%] left-[15%] w-[40rem] h-[40rem] rounded-full mix-blend-screen opacity-10 filter blur-[100px]"
+          animate={{
+            background: [
+              "radial-gradient(circle, rgba(37,99,235,0.8) 0%, transparent 60%)",
+              "radial-gradient(circle, rgba(8,145,178,0.8) 0%, transparent 60%)",
+            ],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute bottom-[10%] right-[15%] w-[40rem] h-[40rem] rounded-full mix-blend-screen opacity-10 filter blur-[100px]"
+          animate={{
+            background: [
+              "radial-gradient(circle, rgba(8,145,178,0.8) 0%, transparent 60%)",
+              "radial-gradient(circle, rgba(37,99,235,0.8) 0%, transparent 60%)",
+            ],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 2,
+          }}
+        />
+      </div>
+
       {/* Main Content */}
       <div className="relative z-10 container-custom section-padding text-center">
         <motion.div
@@ -279,8 +310,8 @@ const Hero = () => {
             </h1>
 
             <p className="body-lg max-w-2xl mx-auto">
-              Transforming ideas into applications across web, mobile,
-              and IoT ecosystems
+              Transforming ideas into applications across web, mobile, and IoT
+              ecosystems
             </p>
           </motion.div>
 
@@ -291,21 +322,21 @@ const Hero = () => {
             transition={{ delay: 0.6 }}
             className="max-w-2xl mx-auto"
           >
-            <div className="glass rounded-lg overflow-hidden">
+            <div className="glass rounded-lg overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
               {/* Terminal Header */}
-              <div className="flex items-center justify-between px-4 py-2 bg-secondary/20 border-b border-border/30">
+              <div className="flex items-center justify-between px-4 py-2 bg-black/60 border-b border-border/30">
                 <div className="flex space-x-2">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.5)]"></div>
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-[0_0_8px_rgba(234,179,8,0.5)]"></div>
+                  <div className="w-3 h-3 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
                 </div>
-                <span className="text-sm text-muted-foreground">
+                <span className="text-sm font-mono text-primary/80">
                   ~/portfolio
                 </span>
               </div>
 
               {/* Enhanced Terminal Body */}
-              <div className="p-4 bg-black font-mono text-left space-y-1 min-h-[320px] backdrop-blur-sm">
+              <div className="p-4 bg-background/80 font-mono text-left space-y-1 min-h-[320px] backdrop-blur-md">
                 {codeLines.map((line, lineIndex) => (
                   <div
                     key={lineIndex}

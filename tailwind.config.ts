@@ -78,7 +78,8 @@ const config: Config = {
   			'scale-in': 'scale-in 0.3s ease-out',
   			'typing': 'typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite',
   			'float': 'float 6s ease-in-out infinite',
-  			'glow': 'glow 2s ease-in-out infinite alternate'
+  			'glow': 'glow 2s ease-in-out infinite alternate',
+  			'pulse-ring': 'pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite'
   		},
   		keyframes: {
   			'fade-in': {
@@ -169,6 +170,20 @@ const config: Config = {
   				},
   				'100%': {
   					boxShadow: '0 0 30px hsl(var(--primary) / 0.6)'
+  				}
+  			},
+  			'pulse-ring': {
+  				'0%': {
+  					transform: 'scale(0.8)',
+  					boxShadow: '0 0 0 0 hsl(var(--primary) / 0.5)'
+  				},
+  				'70%': {
+  					transform: 'scale(1)',
+  					boxShadow: '0 0 0 10px hsl(var(--primary) / 0)'
+  				},
+  				'100%': {
+  					transform: 'scale(0.8)',
+  					boxShadow: '0 0 0 0 hsl(var(--primary) / 0)'
   				}
   			}
   		}

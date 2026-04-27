@@ -4,27 +4,27 @@
 
 @layer base {
   :root {
-    /* Dark theme variables - optimized design system */
-    --background: 0 0% 0%;
+    /* Style: Soft UI Evolution + Cyberpunk Dark Mode (Portfolio/Personal Palette) */
+    --background: 240 10% 4%;
     --foreground: 0 0% 98%;
-    --card: 222 13% 11%;
+    --card: 240 6% 10%;
     --card-foreground: 0 0% 98%;
-    --popover: 222 13% 11%;
+    --popover: 240 6% 10%;
     --popover-foreground: 0 0% 98%;
-    --primary: 217 91% 60%;
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 222 13% 16%;
+    --secondary: 240 5% 26%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 222 13% 16%;
-    --muted-foreground: 215 16% 65%;
-    --accent: 262 83% 58%;
+    --muted: 240 5% 16%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 199 89% 48%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
-    --border: 222 13% 20%;
-    --input: 222 13% 16%;
-    --ring: 217 91% 60%;
-    --radius: 0.5rem;
+    --border: 240 6% 15%;
+    --input: 240 6% 15%;
+    --ring: 221 83% 53%;
+    --radius: 0.75rem;
     
     /* Enhanced spacing system */
     --spacing-xs: 0.5rem;
@@ -90,27 +90,42 @@
 }
 
 @layer components {
-  /* Enhanced glass morphism */
+  /* Soft UI Evolution + Glassmorphism */
   .glass {
-    @apply backdrop-blur-xl bg-card/60 border border-border/30;
-    backdrop-saturate: 180%;
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    @apply backdrop-blur-xl bg-card/40 border border-white/5;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
   }
   
   .glass-subtle {
-    @apply backdrop-blur-sm bg-card/40 border border-border/20;
+    @apply backdrop-blur-md bg-background/50 border border-white/5;
   }
   
-  /* Enhanced gradient text */
+  /* Cyberpunk HUD / Terminal gradient accents */
   .gradient-text {
     @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-pulse;
     background-size: 200% 100%;
   }
   
   .gradient-text-static {
-    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
   }
   
+  /* HUD Scanline Effect / Glitch Overlay potential */
+  .hud-scanlines::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 10;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    opacity: 0.15;
+  }
+
   /* Floating animation with stagger */
   .float-element {
     animation: float 6s ease-in-out infinite;
@@ -143,7 +158,7 @@
   
   /* Enhanced button styles */
   .btn-primary {
-    @apply relative bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-lg font-medium transition-all duration-300 overflow-hidden;
+    @apply relative bg-primary/20 border border-primary/50 text-white hover:bg-primary/30 px-6 py-3 rounded-xl font-medium transition-all duration-300 overflow-hidden shadow-[0_0_15px_rgba(37,99,235,0.2)];
   }
   
   .btn-primary::before {
