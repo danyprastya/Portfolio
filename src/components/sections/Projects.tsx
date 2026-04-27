@@ -17,6 +17,7 @@ interface Project {
   githubUrl: string;
   websiteUrl: string;
   technologies?: string[];
+  showVisitLink?: boolean;
 }
 
 const categoryIcons = {
@@ -43,8 +44,8 @@ const Projects = () => {
           p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
           p.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
           p.technologies?.some((t) =>
-            t.toLowerCase().includes(searchTerm.toLowerCase())
-          )
+            t.toLowerCase().includes(searchTerm.toLowerCase()),
+          ),
       );
     }
 
@@ -83,7 +84,7 @@ const Projects = () => {
           "border border-border/30 backdrop-blur-sm relative overflow-hidden",
           isSelected
             ? "bg-primary text-primary-foreground border-primary/50 shadow-lg"
-            : "bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 hover:border-border/60"
+            : "bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 hover:border-border/60",
         )}
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.98 }}
@@ -134,7 +135,7 @@ const Projects = () => {
                 "glass border border-border/30 focus:border-primary/50",
                 "bg-background/50 text-foreground placeholder:text-muted-foreground",
                 "focus:outline-none focus:ring-2 focus:ring-primary/20",
-                "transition-all duration-300"
+                "transition-all duration-300",
               )}
             />
           </div>
@@ -173,7 +174,7 @@ const Projects = () => {
             animate="visible"
             exit="hidden"
             className={cn(
-              "grid gap-2 sm:gap-3 md:gap-4 lg:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-3 sm:p-4 lg:p-6 justify-items-center"
+              "grid gap-2 sm:gap-3 md:gap-4 lg:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-3 sm:p-4 lg:p-6 justify-items-center",
             )}
           >
             {filteredProjects.length > 0 ? (

@@ -30,9 +30,15 @@ interface Project {
   image: string;
   githubUrl: string;
   websiteUrl: string;
+  showVisitLink?: boolean;
 }
 
-export function ExpandableProjectCard({ project, className }: ExpandableProjectCardProps) {
+export function ExpandableProjectCard({
+  project,
+  className,
+}: ExpandableProjectCardProps) {
+  const { showVisitLink = true } = project;
+
   return (
     <Expandable expandDirection="both" expandBehavior="replace">
       {({ isExpanded }) => (
@@ -40,7 +46,7 @@ export function ExpandableProjectCard({ project, className }: ExpandableProjectC
           <ExpandableCard
             className={cn(
               "w-full relative glass border border-border/20 shadow-lg rounded-lg sm:rounded-xl md:rounded-[2rem] overflow-hidden",
-              className // merge class tambahan
+              className, // merge class tambahan
             )}
             collapsedSize={{ width: 330, height: 220 }}
             expandedSize={{ width: 430, height: 320 }}
@@ -105,26 +111,36 @@ export function ExpandableProjectCard({ project, className }: ExpandableProjectC
               <ExpandableContent preset="slide-up">
                 <ExpandableCardFooter className="flex justify-start items-center py-2 sm:py-4">
                   <div className="flex justify-start items-center gap-2 pb-2 sm:pb-4">
+                    <Button
+                      variant="outline"
+                      asChild
+                      className="flex items-center rounded-full w-fit justify-center"
+                    >
+                      <Link
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Github className="w-4 h-4" />
+                        GitHub
+                      </Link>
+                    </Button>
 
-                  <Button
-                    variant="outline"
-                    asChild
-                    className="flex items-center rounded-full w-fit justify-center"
-                  >
-                    <Link href={project.githubUrl} target="_blank" rel="noreferrer">
-                      <Github className="w-4 h-4" />
-                      GitHub
-                    </Link>
-                  </Button>
-                  <Button
-                    className="btn-primary w-fit rounded-full flex items-center justify-center"
-                    asChild
-                  >
-                    <Link href={project.websiteUrl} target="_blank" rel="noreferrer">
-                      <Globe className="w-4 h-4" />
-                      Visit Site
-                    </Link>
-                  </Button>
+                    {showVisitLink && (
+                      <Button
+                        className="btn-primary w-fit rounded-full flex items-center justify-center"
+                        asChild
+                      >
+                        <Link
+                          href={project.websiteUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <Globe className="w-4 h-4" />
+                          Visit Site
+                        </Link>
+                      </Button>
+                    )}
                   </div>
                 </ExpandableCardFooter>
               </ExpandableContent>
