@@ -99,7 +99,7 @@ export function ExpandableProjectCard({
             {isExpanded && (
               <ExpandableCardContent className="px-2 sm:px-4">
                 <ExpandableContent preset="fade" keepMounted>
-                  <div className="mt-4 text-sm text-muted-foreground max-h-32 overflow-y-auto pr-2">
+                  <div className="mt-4 text-sm text-muted-foreground h-32 max-h-34 px-2 pb-2">
                     {project.description}
                   </div>
                 </ExpandableContent>

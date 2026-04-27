@@ -59,22 +59,6 @@
       "technologies": ["Flutter", "Firebase", "SQLite", "Chart.js", "Provider"]
     },
     {
-      "id": "project-5",
-      "name": "Triandi Kreasi Utama",
-      "category": "Website",
-      "image": "/projects/triandi.png",
-      "description": "Professional construction company profile website highlighting comprehensive building and infrastructure services. Features complete service portfolio, construction project showcase, company expertise overview, client success stories, and integrated contact forms for project consultations and estimates.",
-      "githubUrl": "https://github.com/danyprastya/website-triandi-kreasi-utama.git",
-      "websiteUrl": "https://website-triandi-kreasi-utama.vercel.app/",
-      "technologies": [
-        "React Native",
-        "Redux",
-        "Firebase",
-        "HealthKit",
-        "Google Fit"
-      ]
-    },
-    {
       "id": "project-6",
       "name": "Arthaloka Technology",
       "category": "Website",
@@ -105,7 +89,7 @@
       "name": "SkamGuard",
       "category": "Website",
       "image": "/projects/skamguard.png",
-      "description": "Proactive, real-time AI scam defense platform designed to protect users from fraudulent messages. Analyzes suspicious texts and screenshots using OCR, URL intelligence, and phone verification. Powered by Gemini AI and Firebase Genkit to calculate risk scores and provide actionable safety steps.",
+      "description": "Proactive, real-time AI scam defense platform. Analyzes suspicious texts and screenshots using OCR, URL intelligence, and phone verification. Powered by Gemini AI and Firebase Genkit to calculate risk scores and provide actionable safety steps.",
       "githubUrl": "https://github.com/bilalarief/SkamGuard",
       "websiteUrl": "https://github.com/bilalarief/SkamGuard",
       "technologies": [
@@ -116,6 +100,23 @@
         "Firebase Genkit"
       ],
       "showVisitLink": false
+    },
+    {
+      "id": "project-9",
+      "name": "FinTrack AI",
+      "category": "Website",
+      "image": "/projects/finatracker.png",
+      "description": "Smart personal finance tracker PWA. Features AI-powered receipt scanning OCR, a Telegram bot for logging transactions on-the-go, and spending analytics.",
+      "githubUrl": "https://github.com/your-username/fintrack-ai",
+      "websiteUrl": "https://fintrack-ai.vercel.app",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Firebase",
+        "Gemini AI",
+        "PWA"
+      ]
     }
   ],
   "categories": ["All", "Website", "Mobile Apps", "IoT"]

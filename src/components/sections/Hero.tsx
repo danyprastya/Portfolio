@@ -189,22 +189,22 @@ const Hero = () => {
   // Shorter, more concise code lines dengan indentasi yang proper
   const codeLines = useMemo(
     () => [
-      "// Crafting digital experiences ☕",
+      "// Crafting digital experiences",
       "class CreativeDeveloper {",
       "  constructor() {",
-      "    this.developer = ['Dany', 'Prastya', 'Al-Hakim'];",
-      "    this.passion = 'Building amazing products';",
+      "    this.developer = ['Dany', 'Prastya'];",
+      "    this.passion = 'Build amazing projects';",
       "  }",
       "",
       "  async create(idea) {",
       "    const magic = await this.design(idea)",
       "      .then(ui => this.develop(ui))",
       "      .then(app => this.deploy(app));",
-      "    return magic.launch(); // 🚀",
+      "    return magic.launch(); // Ready to Build!",
       "  }",
       "}",
       "",
-      "// Ready to build something amazing?",
+      "// Scroll to know more about me!",
     ],
     []
   );
