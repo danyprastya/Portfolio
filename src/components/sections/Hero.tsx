@@ -273,13 +273,13 @@ const Hero = () => {
             className="space-y-4"
           >
             <h1 className="heading-xl">
-              Building Tomorrow&apos;s
+              Results-Driven
               <br />
-              <span className="gradient-text">Digital Solutions</span>
+              <span className="gradient-text">Developer</span>
             </h1>
 
             <p className="body-lg max-w-2xl mx-auto">
-              Transforming ideas into powerful applications across web, mobile,
+              Transforming ideas into applications across web, mobile,
               and IoT ecosystems
             </p>
           </motion.div>
