@@ -3,10 +3,8 @@
 import { cn } from "@/lib/utils";
 import {
   Phone,
-  Music2,
   Github,
   Linkedin,
-  Instagram,
   MapPin,
   Clock3,
 } from "lucide-react";
@@ -39,9 +37,9 @@ interface BentoItem {
   icons?: boolean;
   href?: string;
   feature?:
-    | "profile" //fitur sendiri
-    | "techStack" //fitur sendiri
-    | "social" //fitur baru
+    | "profile"
+    | "techStack"
+    | "social"
     | "achievements";
   profile?: {
     imageUrl: string;
@@ -95,18 +93,14 @@ const bentoItems: BentoItem[] = [
       title: "Hello, I'm Dany Prastya",
       description: (
         <>
-          I&apos;m a passionate computer science student and freelance developer
-          with <strong>2+ years of experience</strong> specializing in{" "}
-          <strong>full-stack web development</strong>,{" "}
-          <strong>mobile applications</strong>, <strong>IoT systems</strong>,
-          <strong>data analyst</strong>, and <strong>machine learning</strong>.
+          2+ years building <strong>production web apps</strong> and{" "}
+          <strong>AI-powered automation</strong> for businesses worldwide.
+          I build the site, then wire up the workflows so the tedious stuff runs itself.
         </>
       ),
       role: [
+        "AI Automation Engineer",
         "Full-Stack Developer",
-        "Mobile App Developer",
-        "IoT System Builder",
-        "Data analyst",
       ],
     },
     size: "md",
@@ -115,14 +109,14 @@ const bentoItems: BentoItem[] = [
   {
     id: "techStack",
     title: "My Skill",
-    description: "Here's some Tech Stack that i have experience in",
+    description: "Technologies I work with",
     href: "#",
     feature: "techStack",
     techStack: Object.entries(skillData.techStack).map(([category, items]) => ({
       category,
       items: (items as Array<any>).map((item) => ({
         title: item.name,
-        icon: item.icon, // contoh: "SiReact"
+        icon: item.icon,
       })),
     })),
     size: "lg",
@@ -131,7 +125,7 @@ const bentoItems: BentoItem[] = [
   {
     id: "social",
     title: "Let's Connect",
-    description: "Ready to collaborate? Let's build something amazing together",
+    description: "Ready to work together? Here's how to reach me",
     feature: "social",
     social: {
       contacts: {
@@ -147,26 +141,14 @@ const bentoItems: BentoItem[] = [
         },
         {
           name: "LinkedIn",
-          url: "https://www.linkedin.com/in/dany-prastya-al-hakim-9b181428b",
+          url: "https://www.linkedin.com/in/danyprastya/",
           icon: Linkedin,
           color: "hover:bg-blue-600 hover:text-white",
-        },
-        {
-          name: "Instagram",
-          url: "https://instagram.com/danyhkm_",
-          icon: Instagram,
-          color: "hover:bg-pink-500 hover:text-white",
-        },
-        {
-          name: "Tiktok",
-          url: "https://tiktok.com/dnyhkm",
-          icon: Music2,
-          color: "hover:bg-pink-500 hover:text-white",
         },
       ],
       availability: {
         status: "available",
-        location: "Bandung, Indonesia",
+        location: "Indonesia",
         timezone: "UTC+7",
       },
     },
@@ -182,26 +164,25 @@ const bentoItems: BentoItem[] = [
     achievements: {
       stats: [
         {
-          label: "Projects Completed",
+          label: "Projects Shipped",
           value: 10,
           suffix: "+",
           color: "#10b981",
         },
-        { label: "Years Experience", value: 2, suffix: "+", color: "#3b82f6" },
-        { label: "Happy Clients", value: 15, suffix: "+", color: "#f59e0b" },
+        { label: "Years Building", value: 2, suffix: "+", color: "#3b82f6" },
+        { label: "Technologies", value: 15, suffix: "+", color: "#f59e0b" },
         {
-          label: "Technologies Mastered",
-          value: 15,
-          suffix: "+",
+          label: "Avg. Response",
+          value: 48,
+          suffix: "h",
           color: "#8b5cf6",
         },
       ],
       highlights: [
-        "🏆 Won 2024 Campus Innovation Award",
-        "🚀 Deployed applications with 99.9% uptime",
-        "⚡ Optimized systems achieving 40% performance boost",
-        "🎯 Consistently deliver projects 15% ahead of schedule",
-        "💡 Mentored 10+ junior developers successfully",
+        "Shipped production apps for real businesses",
+        "Built IoT monitoring systems with real-time dashboards",
+        "Integrated AI-powered automation workflows",
+        "Serve clients across different timezones",
       ],
     },
     size: "md",
@@ -538,7 +519,7 @@ const TechStackFeature = ({
   const [selectedCategory, setSelectedCategory] = useState<string>("Frontend");
   const [hasAnimated, setHasAnimated] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  // ambil semua kategori unik
+  // extract unique categories
   const categories = [...techStack.map((group) => group.category)];
 
   useEffect(() => {
@@ -555,7 +536,7 @@ const TechStackFeature = ({
     return () => observer.disconnect();
   }, [hasAnimated]);
 
-  // filter sesuai pilihan
+  // filter by selection
   const filteredGroups =
     selectedCategory === "All"
       ? techStack
@@ -563,7 +544,7 @@ const TechStackFeature = ({
 
   return (
     <div ref={containerRef} className="space-y-6 mt-4">
-      {/* tombol filter */}
+      {/* category filter buttons */}
       <div className="flex flex-wrap gap-2">
         {categories.map((cat) => (
           <button
@@ -584,7 +565,7 @@ const TechStackFeature = ({
         ))}
       </div>
 
-      {/* tampilkan item */}
+      {/* render filtered items */}
       {filteredGroups.map((group, gIdx) => (
         <div key={group.category + gIdx}>
           <h3 className="text-base font-semibold mb-3">{group.category}</h3>
@@ -747,9 +728,9 @@ const BentoCard = ({ item }: { item: BentoItem }) => {
 export default function About() {
   return (
     <section className="relative flex items-center justify-center flex-col min-h-screen my-6">
-      <h1 className="heading-xl mb-10">
+      <h2 className="heading-xl mb-10">
         About <span className="gradient-text">Me</span>
-      </h1>
+      </h2>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 gap-y-6">
         {/* Bento Grid */}
         <motion.div

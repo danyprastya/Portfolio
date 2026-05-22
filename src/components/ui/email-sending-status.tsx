@@ -41,7 +41,7 @@ const draw = {
         type: "spring",
         duration: 1.5,
         bounce: 0.2,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [0.22, 1, 0.36, 1] as const,
       },
       opacity: { delay: i * 0.2, duration: 0.3 },
     },
@@ -211,7 +211,7 @@ export default function EmailSendingStatus({
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 duration: 0.5,
-                ease: [0.22, 1, 0.36, 1],
+                ease: [0.22, 1, 0.36, 1] as const,
               }}
             >
               <div className="relative w-[100px] h-[100px] flex items-center justify-center">
@@ -227,7 +227,7 @@ export default function EmailSendingStatus({
                   transition={{
                     duration: 1.5,
                     times: [0, 0.5, 1],
-                    ease: [0.22, 1, 0.36, 1],
+                    ease: [0.22, 1, 0.36, 1] as const,
                   }}
                 />
                 <AnimatePresence mode="wait">
@@ -344,7 +344,7 @@ export default function EmailSendingStatus({
               transition={{
                 delay: 0.3,
                 duration: 0.8,
-                ease: [0.22, 1, 0.36, 1],
+                ease: [0.22, 1, 0.36, 1] as const,
               }}
             >
               <AnimatePresence mode="wait">
@@ -356,7 +356,7 @@ export default function EmailSendingStatus({
                   exit={{ opacity: 0, y: -20 }}
                   transition={{
                     duration: 0.5,
-                    ease: [0.22, 1, 0.36, 1],
+                    ease: [0.22, 1, 0.36, 1] as const,
                   }}
                 >
                   {status === "sending" && "Email in Progress"}
@@ -374,7 +374,7 @@ export default function EmailSendingStatus({
                   exit={{ opacity: 0, y: -10 }}
                   transition={{
                     duration: 0.4,
-                    ease: [0.22, 1, 0.36, 1],
+                    ease: [0.22, 1, 0.36, 1] as const,
                   }}
                 >
                   {status === "sending" && "Processing your email..."}
@@ -391,7 +391,7 @@ export default function EmailSendingStatus({
                   animate={{ opacity: 1 }}
                   transition={{
                     duration: 0.3,
-                    ease: [0.22, 1, 0.36, 1],
+                    ease: [0.22, 1, 0.36, 1] as const,
                   }}
                 >
                   <motion.div
@@ -402,7 +402,7 @@ export default function EmailSendingStatus({
                     }}
                     transition={{
                       duration: 0.6,
-                      ease: [0.32, 0.72, 0, 1],
+                      ease: [0.32, 0.72, 0, 1] as const,
                     }}
                   >
                     {/* From Section */}
@@ -419,7 +419,7 @@ export default function EmailSendingStatus({
                       }}
                       transition={{
                         duration: 0.6,
-                        ease: [0.32, 0.72, 0, 1],
+                        ease: [0.32, 0.72, 0, 1] as const,
                       }}
                     >
                       <div className="space-y-1 w-full">
@@ -429,7 +429,7 @@ export default function EmailSendingStatus({
                           animate={{ opacity: 1 }}
                           transition={{
                             duration: 0.3,
-                            ease: [0.22, 1, 0.36, 1],
+                            ease: [0.22, 1, 0.36, 1] as const,
                           }}
                         >
                           <User className="w-3 h-3" />
@@ -442,7 +442,7 @@ export default function EmailSendingStatus({
                             animate={{ opacity: 1 }}
                             transition={{
                               duration: 0.3,
-                              ease: [0.22, 1, 0.36, 1],
+                              ease: [0.22, 1, 0.36, 1] as const,
                             }}
                           >
                             <motion.span
@@ -469,7 +469,7 @@ export default function EmailSendingStatus({
                                 }}
                                 transition={{
                                   duration: 0.3,
-                                  ease: [0.22, 1, 0.36, 1],
+                                  ease: [0.22, 1, 0.36, 1] as const,
                                 }}
                               >
                                 {senderName}
@@ -480,7 +480,7 @@ export default function EmailSendingStatus({
                                 animate={{ opacity: 1 }}
                                 transition={{
                                   duration: 0.3,
-                                  ease: [0.22, 1, 0.36, 1],
+                                  ease: [0.22, 1, 0.36, 1] as const,
                                 }}
                               >
                                 {senderEmail}
@@ -505,7 +505,7 @@ export default function EmailSendingStatus({
                       }}
                       transition={{
                         duration: 0.6,
-                        ease: [0.32, 0.72, 0, 1],
+                        ease: [0.32, 0.72, 0, 1] as const,
                       }}
                     >
                       <div className="space-y-1 w-full">
@@ -515,7 +515,7 @@ export default function EmailSendingStatus({
                           animate={{ opacity: 1 }}
                           transition={{
                             duration: 0.3,
-                            ease: [0.22, 1, 0.36, 1],
+                            ease: [0.22, 1, 0.36, 1] as const,
                           }}
                         >
                           <AtSign className="w-3 h-3" />
@@ -528,7 +528,7 @@ export default function EmailSendingStatus({
                             animate={{ opacity: 1 }}
                             transition={{
                               duration: 0.3,
-                              ease: [0.22, 1, 0.36, 1],
+                              ease: [0.22, 1, 0.36, 1] as const,
                             }}
                           >
                             <motion.span
@@ -555,7 +555,7 @@ export default function EmailSendingStatus({
                                 }}
                                 transition={{
                                   duration: 0.3,
-                                  ease: [0.22, 1, 0.36, 1],
+                                  ease: [0.22, 1, 0.36, 1] as const,
                                 }}
                               >
                                 {recipientName}
@@ -566,7 +566,7 @@ export default function EmailSendingStatus({
                                 animate={{ opacity: 1 }}
                                 transition={{
                                   duration: 0.3,
-                                  ease: [0.22, 1, 0.36, 1],
+                                  ease: [0.22, 1, 0.36, 1] as const,
                                 }}
                               >
                                 {recipientEmail}
@@ -587,7 +587,7 @@ export default function EmailSendingStatus({
                 transition={{
                   delay: 0.5,
                   duration: 0.6,
-                  ease: [0.22, 1, 0.36, 1],
+                  ease: [0.22, 1, 0.36, 1] as const,
                 }}
               >
                 <AnimatePresence mode="wait">
@@ -598,7 +598,7 @@ export default function EmailSendingStatus({
                     exit={{ opacity: 0, y: -10 }}
                     transition={{
                       duration: 0.4,
-                      ease: [0.22, 1, 0.36, 1],
+                      ease: [0.22, 1, 0.36, 1] as const,
                     }}
                   >
                     {status === "sending" && "Subject: " + subject}

@@ -4,8 +4,8 @@
       "id": "project-1",
       "name": "Gamplong Studio",
       "category": "Website",
-      "image": "/projects/gamplong.png",
-      "description": "Comprehensive management system for Gamplong Studio tourism site in Yogyakarta featuring dynamic dashboard for monitoring studio equipment rentals and visitor analytics. Includes real-time asset tracking, visitor management, booking system, and detailed reporting for tourism operations.",
+      "image": "/projects/gamplong.webp",
+      "description": "Tourism site needed real-time visibility into equipment rentals and visitor flow. Built a dashboard with live asset tracking, booking management, and analytics. Staff reduced manual tracking time significantly and visitor check-in became instant.",
       "githubUrl": "https://github.com/lokacraft/arthaloka-gamplongstudio.git",
       "websiteUrl": "https://gamplongstudio.vercel.app/",
       "technologies": [
@@ -20,8 +20,8 @@
       "id": "project-2",
       "name": "PT. Nadhif Putra Sejahtera",
       "category": "Website",
-      "image": "/projects/nadhif.png",
-      "description": "Modern construction company profile website with comprehensive heavy equipment rental catalog, dynamic dashboard management, and integrated contact forms. Features include equipment availability tracking, rental booking system, project portfolio showcase, and admin panel for inventory management.",
+      "image": "/projects/nadhif.webp",
+      "description": "Construction company needed a modern web presence to showcase their heavy equipment fleet. Delivered a responsive company profile with a dynamic equipment catalog, rental booking flow, and admin panel for inventory management.",
       "githubUrl": "https://github.com/lokacraft/arthaloka-ptnadhif.git",
       "websiteUrl": "https://ptnadhifputrasejahtera.vercel.app",
       "technologies": [
@@ -36,8 +36,8 @@
       "id": "project-3",
       "name": "Rumah Struktur",
       "category": "Website",
-      "image": "/projects/rumahstruktur.png",
-      "description": "Professional construction company profile website showcasing comprehensive structural engineering services. Features detailed service portfolio, project gallery, team expertise showcase, client testimonials, and integrated contact forms for project inquiries and consultations.",
+      "image": "/projects/rumahstruktur.webp",
+      "description": "Structural engineering firm needed a professional site to attract new clients. Built a service portfolio with project gallery, team showcase, and integrated contact forms that streamlined their client inquiry pipeline.",
       "githubUrl": "https://github.com/lokacraft/arthaloka-rumahstruktur.git",
       "websiteUrl": "https://arthaloka-rumahstruktur.vercel.app/",
       "technologies": [
@@ -52,44 +52,44 @@
       "id": "project-4",
       "name": "Pertenunan Astiti",
       "category": "Website",
-      "image": "/projects/astiti.png",
-      "description": "Machine learning-powered traditional weaving website that educates visitors about various types of traditional Indonesian fabrics. Features AI-driven fabric recommendation system where users can input personal preferences and receive ML-based predictions for suitable fabric types, complete with detailed fabric information and cultural significance.",
+      "image": "/projects/astiti.webp",
+      "description": "Traditional weaving heritage site needed a way to educate visitors about Indonesian fabrics. Integrated an ML-powered fabric recommendation engine that matches users with fabrics based on their preferences and provides cultural context.",
       "githubUrl": "https://github.com/lokacraft/arthaloka-tenunastiti.git",
       "websiteUrl": "https://pertenunanastiti.vercel.app/",
-      "technologies": ["Flutter", "Firebase", "SQLite", "Chart.js", "Provider"]
+      "technologies": ["Next.js", "TypeScript", "Machine Learning", "Tailwind CSS", "Python"]
     },
     {
       "id": "project-6",
       "name": "Arthaloka Technology",
       "category": "Website",
-      "image": "/projects/arthaloka.png",
-      "description": "Corporate profile website for a technology company specializing in SaaS solutions and custom software development. Showcases comprehensive services including website development, mobile applications, IoT systems, and various software solutions with detailed service portfolios and client case studies.",
+      "image": "/projects/arthaloka.webp",
+      "description": "Tech company needed a corporate site that converts visitors into leads. Built a polished SaaS-style landing page with service portfolios, client case studies, and a streamlined contact funnel.",
       "githubUrl": "https://github.com/lokacraft/lokacraft-official-website.git",
       "websiteUrl": "https://www.arthaloka.technology",
       "technologies": [
-        "Flutter",
-        "Google Maps API",
-        "Stripe",
-        "Firebase",
-        "WebSocket"
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "Sanity CMS"
       ]
     },
     {
       "id": "project-7",
       "name": "Aquadex",
       "category": "IoT",
-      "image": "/projects/aquadex.png",
-      "description": "Complete IoT water quality monitoring system with comprehensive web dashboard for real-time water cleanliness assessment. Monitors water turbidity and pH levels with automated alerts, historical data tracking, water quality analytics, and remote monitoring capabilities for ensuring safe water standards.",
+      "image": "/projects/aquadex.webp",
+      "description": "Community needed affordable water quality monitoring. Built an IoT system with ESP32 sensors measuring turbidity and pH in real-time, paired with a web dashboard for alerts, historical trends, and remote monitoring.",
       "githubUrl": "https://github.com/Luxlon/Aquadex.git",
       "websiteUrl": "https://aquadex-six.vercel.app",
-      "technologies": ["Arduino", "ESP32", "MQTT", "React Native", "Firebase"]
+      "technologies": ["Arduino", "ESP32", "MQTT", "React", "Firebase"]
     },
     {
       "id": "project-8",
       "name": "SkamGuard",
       "category": "Website",
-      "image": "/projects/skamguard.png",
-      "description": "Proactive, real-time AI scam defense platform. Analyzes suspicious texts and screenshots using OCR, URL intelligence, and phone verification. Powered by Gemini AI and Firebase Genkit to calculate risk scores and provide actionable safety steps.",
+      "image": "/projects/skamguard.webp",
+      "description": "Hackathon project tackling Indonesia's scam epidemic. Built a real-time AI defense platform that analyzes suspicious texts and screenshots using OCR, URL intelligence, and Gemini AI to calculate risk scores and provide actionable safety steps.",
       "githubUrl": "https://github.com/bilalarief/SkamGuard",
       "websiteUrl": "https://github.com/bilalarief/SkamGuard",
       "technologies": [
@@ -105,9 +105,9 @@
       "id": "project-9",
       "name": "FinTrack AI",
       "category": "Website",
-      "image": "/projects/finatracker.png",
-      "description": "Smart personal finance tracker PWA. Features AI-powered receipt scanning OCR, a Telegram bot for logging transactions on-the-go, and spending analytics.",
-      "githubUrl": "https://github.com/your-username/fintrack-ai",
+      "image": "/projects/finatracker.webp",
+      "description": "Personal finance tracking was too tedious. Built a PWA with AI-powered receipt scanning, a Telegram bot for on-the-go logging, and spending analytics — making expense tracking effortless.",
+      "githubUrl": "https://github.com/danyprastya/Fintrack-AI",
       "websiteUrl": "https://fintrack-ai.vercel.app",
       "technologies": [
         "Next.js",
@@ -119,5 +119,5 @@
       ]
     }
   ],
-  "categories": ["All", "Website", "Mobile Apps", "IoT"]
+  "categories": ["All", "Website", "IoT"]
 }

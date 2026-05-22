@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { Github, Linkedin, Instagram, Music2, Sparkles } from "lucide-react";
+import { motion } from "motion/react";
+import { Github, Linkedin, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./button";
 
@@ -73,7 +73,7 @@ const EnhancedSocialButton = ({
         }}
         transition={{
           duration: 0.3,
-          ease: [0.23, 1, 0.32, 1],
+          ease: [0.23, 1, 0.32, 1] as const,
         }}
       >
         {shareButtons.map((button, i) => (
@@ -106,7 +106,7 @@ const EnhancedSocialButton = ({
             }}
             transition={{
               duration: 0.3,
-              ease: [0.23, 1, 0.32, 1],
+              ease: [0.23, 1, 0.32, 1] as const,
               delay: isVisible ? i * 0.05 : 0,
             }}
           >

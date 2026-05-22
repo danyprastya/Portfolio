@@ -2,39 +2,27 @@
   "personal": {
     "name": "Dany Prastya",
     "nickname": "Dany",
-    "title": "Full-Stack Developer",
-    "tagline": "Building innovative solutions with modern technologies",
-    "bio": "Passionate computer science student and freelance developer specializing in full-stack web development, mobile applications, IoT systems, and machine learning. I love turning complex problems into simple, beautiful, and intuitive solutions.",
+    "title": "Web Developer & AI Automation",
+    "tagline": "I build websites that work and automate the stuff that shouldn't need a human",
+    "bio": "Web developer with 2+ years shipping production apps. I build fast, responsive sites and wire up AI-powered automation so businesses can stop wasting time on repetitive work. Based in Indonesia, working with clients worldwide.",
     "location": "Indonesia",
-    "availability": "Open to work",
+    "availability": "Available for projects",
     "email": "danyprastyaalhakim@gmail.com",
     "phone": "+62 852-5842-1749",
-    "resume": "/resume/CV_Dany_Prastya (id).pdf"
+    "resume": "/resume/CV-Dany_Prastya-Full_Stack_Developer.pdf"
   },
   "social": {
     "github": {
-      "username": "",
-      "url": "",
+      "username": "danyprastya",
+      "url": "https://github.com/danyprastya",
       "icon": "github",
       "label": "GitHub"
     },
     "linkedin": {
-      "username": "",
-      "url": "",
+      "username": "danyprastya",
+      "url": "https://www.linkedin.com/in/danyprastya/",
       "icon": "linkedin",
       "label": "LinkedIn"
-    },
-    "instagram": {
-      "username": "",
-      "url": "",
-      "icon": "instagram",
-      "label": "Instagram"
-    },
-    "tiktok": {
-      "username": "",
-      "url": "",
-      "icon": "tiktok",
-      "label": "TikTok"
     }
   },
   "contact": {
@@ -45,60 +33,31 @@
     },
     "email": {
       "address": "danyprastyaalhakim@gmail.com",
-      "subject": "Project Inquiry - Portfolio Contact"
+      "subject": "Project Inquiry"
     }
   },
   "experience": [
     {
-      "title": "Freelance Full-Stack Developer",
+      "title": "Freelance Web Developer",
       "company": "Self-Employed",
       "period": "2023 - Present",
-      "description": "Providing web development, mobile app development, and IoT system services to various clients",
+      "description": "Building web applications, company profiles, and dashboards for clients across industries",
       "achievements": [
-        "Delivered 10+ successful web development projects",
-        "Built mobile applications with 10k+ downloads",
-        "Implemented IoT solutions for smart home automation",
-        "Created data visualization dashboards for business insights"
-      ]
-    },
-    {
-      "title": "Computer Science Student",
-      "company": "University",
-      "period": "2022 - Present",
-      "description": "Pursuing Bachelor's degree in Computer Science with focus on software engineering and emerging technologies",
-      "achievements": [
-        "Maintaining excellent academic performance",
-        "Active in programming competitions",
-        "Leading tech community projects",
-        "Contributing to open-source initiatives"
+        "Shipped 10+ production web projects",
+        "Built real-time dashboards for tourism and construction companies",
+        "Integrated AI-powered features including OCR and risk scoring",
+        "Delivered IoT monitoring systems with live data visualization"
       ]
     }
   ],
   "education": [
     {
-      "degree": "Bachelor of Computer Science",
-      "school": "University Name",
+      "degree": "Bachelor of Informatics Engineering",
+      "school": "National Institute of Technology Bandung (ITENAS)",
       "period": "2022 - Present",
       "status": "In Progress",
-      "description": "Focusing on software engineering, algorithms, data structures, and modern development practices"
+      "description": "Studying software engineering, algorithms, and modern development practices"
     }
   ],
-  "testimonials": [
-    {
-      "name": "Client Name",
-      "position": "Position Title",
-      "company": "Company Name",
-      "content": "Dany delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise made the entire development process smooth and efficient.",
-      "rating": 5,
-      "project": "E-Commerce Platform"
-    },
-    {
-      "name": "Client Name 2",
-      "position": "Position Title 2", 
-      "company": "Company Name 2",
-      "content": "Working with Dany on our IoT project was a great experience. He understood our requirements perfectly and delivered a robust solution that has been running flawlessly for months.",
-      "rating": 5,
-      "project": "Smart Home IoT System"
-    }
-  ]
+  "testimonials": []
 }

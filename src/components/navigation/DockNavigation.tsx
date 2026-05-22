@@ -1,4 +1,4 @@
-import { FolderCode, HeadsetIcon, HomeIcon, CircleUser } from "lucide-react";
+import { FolderCode, HeadsetIcon, HomeIcon, CircleUser, Layers } from "lucide-react";
 
 import { Dock, DockIcon, DockItem, DockLabel } from "@/components/ui/dock";
 import Link from "next/link";
@@ -17,6 +17,13 @@ const data = [
       <CircleUser className="h-full w-full text-neutral-600 dark:text-neutral-300" />
     ),
     href: "#about",
+  },
+  {
+    title: "Services",
+    icon: (
+      <Layers className="h-full w-full text-neutral-600 dark:text-neutral-300" />
+    ),
+    href: "#services",
   },
   {
     title: "Projects",

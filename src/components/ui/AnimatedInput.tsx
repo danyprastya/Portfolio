@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SPRING = {
@@ -14,7 +14,7 @@ const SPRING = {
 
 const LABEL_TRANSITION = {
   duration: 0.28,
-  ease: [0.4, 0, 0.2, 1], // standard material easing
+  ease: [0.4, 0, 0.2, 1] as const,
 };
 
 export interface AnimatedInputProps {

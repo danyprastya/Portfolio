@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
-import { motion } from "framer-motion";
-import { ChevronDown, Download, ExternalLink, Mail } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { motion } from "motion/react";
+import { ArrowRight, Download } from "lucide-react";
 import socialData from "@/data/social.json";
 
-// Counter component - completely isolated with ref to prevent re-renders
+// Counter component — isolated with ref to prevent re-renders
 const AnimatedCounter = ({
   end,
   suffix = "",
@@ -31,7 +31,7 @@ const AnimatedCounter = ({
       const step = (timestamp: number) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const easeOutQuart = 1 - Math.pow(1 - progress, 4); // Smooth easing
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
         setCount(Math.floor(easeOutQuart * end));
 
         if (progress < 1) {
@@ -50,7 +50,7 @@ const AnimatedCounter = ({
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [duration, end, startDelay]); // Empty dependency array - runs only once
+  }, [duration, end, startDelay]);
 
   return (
     <span>
@@ -60,191 +60,7 @@ const AnimatedCounter = ({
   );
 };
 
-// Syntax Highlighter Component - Fixed with proper whitespace handling
-const SyntaxHighlighter = ({ line }: { line: string }) => {
-  if (line.trim() === "") {
-    return <span>&nbsp;</span>;
-  }
-
-  // Create highlighted segments
-  const highlightSyntax = (text: string) => {
-    // Split into tokens to avoid overlapping replacements
-    const tokens = text.split(
-      /(\s+|[{}[\](),;]|\.|\b(?:const|let|var|function|class|async|await|return|import|export|from|new|this)\b|\/\/.*|'[^']*'|"[^"]*"|`[^`]*`)/,
-    );
-
-    return tokens.map((token, index) => {
-      // Preserve whitespace including leading spaces for indentation
-      if (/^\s+$/.test(token)) {
-        return (
-          <span key={index} style={{ whiteSpace: "pre" }}>
-            {token}
-          </span>
-        );
-      }
-
-      // Keywords (blue)
-      if (
-        /^(const|let|var|function|class|async|await|return|import|export|from|new|this)$/.test(
-          token,
-        )
-      ) {
-        return (
-          <span key={index} style={{ color: "#60a5fa", fontWeight: "500" }}>
-            {token}
-          </span>
-        );
-      }
-
-      // Built-in objects (emerald)
-      if (
-        /^(Promise|Array|Object|String|Number|Boolean|console)$/.test(token)
-      ) {
-        return (
-          <span key={index} style={{ color: "#34d399" }}>
-            {token}
-          </span>
-        );
-      }
-
-      // Strings (green)
-      if (/^(['"`].*\1)$/.test(token)) {
-        return (
-          <span key={index} style={{ color: "#86efac" }}>
-            {token}
-          </span>
-        );
-      }
-
-      // Comments (gray, italic)
-      if (/^\/\//.test(token)) {
-        return (
-          <span key={index} style={{ color: "#9ca3af", fontStyle: "italic" }}>
-            {token}
-          </span>
-        );
-      }
-
-      // Method calls - check if next non-whitespace token is (
-      if (token.endsWith(".")) {
-        const nextTokenIndex = tokens.findIndex(
-          (t, i) => i > index && t.trim() !== "",
-        );
-        const nextToken = tokens[nextTokenIndex];
-        if (nextToken && nextToken.endsWith("(")) {
-          const methodName = nextToken.slice(0, -1);
-          tokens[nextTokenIndex] = "("; // Replace the token
-          return (
-            <span key={index}>
-              {token}
-              <span style={{ color: "#fde047" }}>{methodName}</span>
-            </span>
-          );
-        }
-      }
-
-      // Arrow functions (pink)
-      if (token === "=>") {
-        return (
-          <span key={index} style={{ color: "#f472b6" }}>
-            {token}
-          </span>
-        );
-      }
-
-      // Brackets (light gray)
-      if (/^[{}[\](),;]$/.test(token)) {
-        return (
-          <span key={index} style={{ color: "#d1d5db" }}>
-            {token}
-          </span>
-        );
-      }
-
-      // Emojis (larger)
-      if (/^[â˜•ðŸš€]$/.test(token)) {
-        return (
-          <span key={index} style={{ fontSize: "1.1em" }}>
-            {token}
-          </span>
-        );
-      }
-
-      // Default color for other text
-      return (
-        <span key={index} style={{ color: "#ffffff" }}>
-          {token}
-        </span>
-      );
-    });
-  };
-
-  return <span style={{ whiteSpace: "pre" }}>{highlightSyntax(line)}</span>;
-};
-
 const Hero = () => {
-  const [displayText, setDisplayText] = useState("");
-  const [currentLineIndex, setCurrentLineIndex] = useState(0);
-
-  // Shorter, more concise code lines dengan indentasi yang proper
-  const codeLines = useMemo(
-    () => [
-      "// Crafting digital experiences",
-      "class CreativeDeveloper {",
-      "  constructor() {",
-      "    this.developer = ['Dany', 'Prastya'];",
-      "    this.passion = 'Build amazing projects';",
-      "  }",
-      "",
-      "  async create(idea) {",
-      "    const magic = await this.design(idea)",
-      "      .then(ui => this.develop(ui))",
-      "      .then(app => this.deploy(app));",
-      "    return magic.launch(); // Ready to Build!",
-      "  }",
-      "}",
-      "",
-      "// Scroll to know more about me!",
-    ],
-    [],
-  );
-
-  // Stats data - completely static
-  const stats = useMemo(
-    () => [
-      { number: 10, label: "Projects Completed", suffix: "+" },
-      { number: 10, label: "Happy Clients", suffix: "+" },
-      { number: 15, label: "Tech Stack", suffix: "+" },
-      { number: 24, label: "Support", suffix: "/7" },
-    ],
-    [],
-  );
-
-  // Faster typewriter effect
-  useEffect(() => {
-    if (currentLineIndex >= codeLines.length) return;
-
-    const currentText = codeLines[currentLineIndex];
-
-    const timeout = setTimeout(
-      () => {
-        if (displayText === currentText) {
-          // Quick pause before next line
-          setTimeout(() => {
-            setCurrentLineIndex((prev) => prev + 1);
-            setDisplayText("");
-          }, 400); // Reduced from 1500ms to 400ms
-        } else {
-          // Fast typing
-          setDisplayText(currentText.slice(0, displayText.length + 1));
-        }
-      },
-      currentText === "" ? 200 : 30,
-    ); // 30ms for typing, 200ms for empty lines
-
-    return () => clearTimeout(timeout);
-  }, [displayText, currentLineIndex, codeLines]);
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -257,220 +73,150 @@ const Hero = () => {
       id="hero"
       className="relative flex items-center justify-center min-h-screen overflow-hidden"
     >
-      {/* Background elements */}
+      {/* Subtle background gradient — intentional, not distracting */}
       <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute top-[20%] left-[15%] w-[40rem] h-[40rem] rounded-full mix-blend-screen opacity-10 filter blur-[100px]"
-          animate={{
-            background: [
-              "radial-gradient(circle, rgba(37,99,235,0.8) 0%, transparent 60%)",
-              "radial-gradient(circle, rgba(8,145,178,0.8) 0%, transparent 60%)",
-            ],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-        />
-        <motion.div
-          className="absolute bottom-[10%] right-[15%] w-[40rem] h-[40rem] rounded-full mix-blend-screen opacity-10 filter blur-[100px]"
-          animate={{
-            background: [
-              "radial-gradient(circle, rgba(8,145,178,0.8) 0%, transparent 60%)",
-              "radial-gradient(circle, rgba(37,99,235,0.8) 0%, transparent 60%)",
-            ],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "linear",
-            delay: 2,
-          }}
-        />
+        <div className="absolute top-1/3 left-1/4 w-[30rem] h-[30rem] rounded-full bg-primary/5 blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[25rem] h-[25rem] rounded-full bg-cyan-500/5 blur-[120px]" />
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 container-custom section-padding text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-12"
-        >
-          {/* Main Title */}
+      <div className="relative z-10 container-custom section-padding text-center max-w-4xl mx-auto">
+        <div className="space-y-10">
+
+          {/* Headline */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="space-y-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="space-y-5"
           >
-            <h1 className="heading-xl">
-              Results-Driven
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-semibold tracking-tight text-foreground leading-[1.1]">
+              I build websites
               <br />
-              <span className="gradient-text">Developer</span>
+              <span className="gradient-text">that work.</span>
             </h1>
 
-            <p className="body-lg max-w-2xl mx-auto">
-              Transforming ideas into applications across web, mobile, and IoT
-              ecosystems
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-normal">
+              Fast web apps and AI automation that save you time and bring in
+              customers.
             </p>
           </motion.div>
 
-          {/* Terminal Section */}
+          {/* Stats — inline, lightweight */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="flex flex-wrap justify-center gap-8 sm:gap-12 text-center"
           >
-            <div className="glass rounded-lg overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-              {/* Terminal Header */}
-              <div className="flex items-center justify-between px-4 py-2 bg-black/60 border-b border-border/30">
-                <div className="flex space-x-2">
-                  <div className="w-3 h-3 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.5)]"></div>
-                  <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-[0_0_8px_rgba(234,179,8,0.5)]"></div>
-                  <div className="w-3 h-3 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
-                </div>
-                <span className="text-sm font-mono text-primary/80">
-                  ~/portfolio
+            {[
+              { end: 10, suffix: "+", label: "Projects shipped" },
+              { end: 2, suffix: "+", label: "Years building" },
+              { end: 15, suffix: "+", label: "Technologies" },
+              { end: 24, suffix: "h", label: "Avg. response time" },
+            ].map((stat, i) => (
+              <div key={stat.label} className="flex flex-col items-center">
+                <span className="text-2xl sm:text-3xl font-bold text-foreground tabular-nums">
+                  <AnimatedCounter
+                    end={stat.end}
+                    suffix={stat.suffix}
+                    duration={2000}
+                    startDelay={400 + i * 100}
+                  />
+                </span>
+                <span className="text-xs sm:text-sm text-muted-foreground mt-1">
+                  {stat.label}
                 </span>
               </div>
-
-              {/* Enhanced Terminal Body */}
-              <div className="p-4 bg-background/80 font-mono text-left space-y-1 min-h-[320px] backdrop-blur-md">
-                {codeLines.map((line, lineIndex) => (
-                  <div
-                    key={lineIndex}
-                    className="flex items-start space-x-3 group"
-                  >
-                    {/* Line numbers for ALL lines including empty ones */}
-                    <span className="text-gray-500 select-none text-xs leading-5 w-6 text-right font-light">
-                      {String(lineIndex + 1).padStart(2, "0")}
-                    </span>
-                    <span
-                      className="text-sm flex-1 leading-5"
-                      style={{ whiteSpace: "pre" }}
-                    >
-                      {lineIndex < currentLineIndex ? (
-                        line.trim() === "" ? (
-                          <span>&nbsp;</span>
-                        ) : (
-                          <SyntaxHighlighter line={line} />
-                        )
-                      ) : lineIndex === currentLineIndex ? (
-                        <>
-                          {displayText.trim() === "" ? (
-                            <span>&nbsp;</span>
-                          ) : (
-                            <SyntaxHighlighter line={displayText} />
-                          )}
-                          <span className="animate-pulse text-blue-400 ml-1 font-bold">
-                            |
-                          </span>
-                        </>
-                      ) : null}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Stats Section - Isolated from typewriter */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2 }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto"
-          >
-            {stats.map((stat, statIndex) => (
-              <motion.div
-                key={stat.label} // Simple stable key
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.4 + statIndex * 0.1 }}
-                className="card-base text-center group hover:border-primary/30 transition-all duration-300"
-              >
-                <div className="text-2xl sm:text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">
-                  <AnimatedCounter
-                    end={stat.number}
-                    suffix={stat.suffix}
-                    duration={2500}
-                    startDelay={1600 + statIndex * 200} // Staggered start
-                  />
-                </div>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {stat.label}
-                </p>
-              </motion.div>
             ))}
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* CTAs — clear hierarchy: 1 primary, 1 secondary, 1 ghost */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            transition={{ delay: 0.4, duration: 0.4 }}
+            className="flex flex-col sm:flex-row gap-3 justify-center items-center"
           >
             <button
-              onClick={() => scrollToSection("projects")}
-              className="btn-primary group flex items-center gap-2"
+              onClick={() => scrollToSection("contact")}
+              className="btn-primary group inline-flex items-center gap-2 text-base"
             >
-              View My Work
-              <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              Get a Free Quote
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </button>
 
             <button
-              onClick={() => scrollToSection("contact")}
-              className="btn-secondary group flex items-center gap-2"
+              onClick={() => scrollToSection("projects")}
+              className="btn-secondary group inline-flex items-center gap-2 text-base"
             >
-              <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              Let&apos;s Collaborate
+              See My Work
             </button>
 
             <a
               href={socialData.personal.resume}
               download
-              className="btn-ghost group flex items-center gap-2"
+              className="btn-ghost group inline-flex items-center gap-2 text-sm"
             >
-              <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+              <Download className="w-4 h-4" />
               Resume
             </a>
           </motion.div>
-
-          {/* Availability Badge */}
+        </div>
+        <div className="w-full mx-auto mt-5">
+          {/* Availability Badge — trust signal first */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.0 }}
-            className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="flex justify-center"
           >
-            <div className="relative">
-              <div className="w-2 h-2 bg-green-500 rounded-full" />
-              <div className="w-2 h-2 absolute inset-0 animate-ping opacity-75 bg-green-500 rounded-full"></div>
-            </div>
-            <span className="text-sm text-muted-foreground">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border/40 bg-secondary/30 text-sm text-muted-foreground">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
               {socialData.personal.availability}
-            </span>
+            </div>
           </motion.div>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <button
-            onClick={() => scrollToSection("about")}
-            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors group"
-          >
-            <span className="text-sm">Scroll to explore</span>
-            <ChevronDown className="w-6 h-6 animate-bounce group-hover:translate-y-1 transition-transform" />
-          </button>
-        </motion.div>
+        </div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
+        <button
+          onClick={() => scrollToSection("about")}
+          className="flex flex-col items-center gap-1 text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+          aria-label="Scroll to about section"
+        >
+          <span className="text-xs">Scroll</span>
+          <motion.div
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              className="text-current"
+            >
+              <path
+                d="M4 6L8 10L12 6"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </motion.div>
+        </button>
+      </motion.div>
     </section>
   );
 };

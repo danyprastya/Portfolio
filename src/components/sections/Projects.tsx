@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Filter, Search, Code, Smartphone, Cpu, Globe } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { Filter, Search, Code, Cpu, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ExpandableProjectCard } from "@/components/ui/ExpandableProjectCard";
 // import { GitHubHeatmap } from "@/components/ui/GithubHeatmap";
@@ -23,7 +23,6 @@ interface Project {
 const categoryIcons = {
   All: Globe,
   Website: Code,
-  "Mobile Apps": Smartphone,
   IoT: Cpu,
 };
 
@@ -61,7 +60,7 @@ const Projects = () => {
         delayChildren: 0.12,
       },
     },
-  };
+  } as const;
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20, scale: 0.98 },
@@ -69,7 +68,7 @@ const Projects = () => {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { type: "spring", stiffness: 260, damping: 20 },
+      transition: { type: "spring" as const, stiffness: 260, damping: 20 },
     },
   };
 

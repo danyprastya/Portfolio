@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import {
   Menu,
   X,
   Home,
   User,
+  Layers,
   Briefcase,
   Mail,
 } from "lucide-react";
@@ -21,6 +22,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { id: "hero", label: "Home", icon: Home, href: "#" },
   { id: "about", label: "About", icon: User, href: "#about" },
+  { id: "services", label: "Services", icon: Layers, href: "#services" },
   { id: "projects", label: "Projects", icon: Briefcase, href: "#projects" },
   { id: "contact", label: "Contact", icon: Mail, href: "#contact" },
 ];
@@ -51,7 +53,7 @@ const MobileNavigation = () => {
       transition: {
         delay: i * 0.1,
         duration: 0.3,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     }),
     exit: (i: number) => ({
@@ -63,7 +65,8 @@ const MobileNavigation = () => {
         duration: 0.2,
       },
     }),
-  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any;
 
   const fabVariants = {
     closed: { rotate: 0 },

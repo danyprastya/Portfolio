@@ -172,7 +172,7 @@ const EmailDialog = ({ email }: { email: string }) => {
             )}
             size={120}
             transition={{
-              ease: [0, 0.5, 0.8, 0.5],
+              ease: [0, 0.5, 0.8, 0.5] as const,
               duration: 2,
               repeat: Infinity
             }}

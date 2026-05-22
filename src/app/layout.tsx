@@ -7,19 +7,16 @@ import { ToastProvider } from "@/components/ui/toast";
 // import InitialLoader from "@/components/sections/InitialLoader";
 
 export const metadata: Metadata = {
-  title: "Dany Prastya - Full-Stack Developer & Tech Innovator",
+  title: "Dany Prastya — Web Developer & AI Automation",
   description:
-    "Passionate full-stack developer specializing in web development, mobile apps, IoT systems, and machine learning. Building innovative solutions with modern technologies.",
+    "Web developer building fast, functional sites and AI-powered automation workflows. 10+ shipped projects. Based in Indonesia, working worldwide.",
   keywords: [
-    "Full-Stack Developer",
     "Web Developer",
-    "Mobile App Developer",
-    "IoT Developer",
-    "Machine Learning",
-    "Next.js",
-    "Flutter",
-    "Firebase",
-    "React",
+    "AI Automation",
+    "Next.js Developer",
+    "React Developer",
+    "n8n Automation",
+    "Freelance Web Developer",
     "TypeScript",
     "Dany Prastya",
   ],
@@ -31,33 +28,33 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://danyportofolio.vercel.app"), // Update with your actual domain
+  metadataBase: new URL("https://danyportofolio.vercel.app"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Dany Prastya - Full-Stack Developer & Tech Innovator",
+    title: "Dany Prastya — Web Developer & AI Automation",
     description:
-      "Passionate full-stack developer specializing in web development, mobile apps, IoT systems, and machine learning.",
+      "Web developer building fast, functional sites and AI-powered automation workflows. 10+ shipped projects.",
     url: "https://danyportofolio.vercel.app",
-    siteName: "Dany Prastya Portfolio",
+    siteName: "Dany Prastya",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/og-image.jpg", // Add your OG image
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Dany Prastya - Full-Stack Developer",
+        alt: "Dany Prastya — Web Developer & AI Automation",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dany Prastya - Full-Stack Developer & Tech Innovator",
+    title: "Dany Prastya — Web Developer & AI Automation",
     description:
-      "Passionate full-stack developer specializing in web development, mobile apps, IoT systems, and machine learning.",
-    images: ["/og-image.jpg"],
+      "Web developer building fast, functional sites and AI-powered automation workflows. 10+ shipped projects.",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -70,9 +67,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code", // Add your Google Search Console verification
-  },
 };
 
 export default function RootLayout({
@@ -83,9 +77,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#3b82f6" />
+        <link rel="icon" href="/icons/favicon.ico" sizes="48x48" />
+        <link rel="icon" href="/icons/favicon-16x16.png" sizes="16x16" type="image/png" />
+        <link rel="icon" href="/icons/favicon-32x32.png" sizes="32x32" type="image/png" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#2563eb" />
       </head>
       <body className={`${inter.variable} ${plusJakarta.variable} antialiased`}>
         {/* <InitialLoader /> */}

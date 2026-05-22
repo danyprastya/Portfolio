@@ -1,14 +1,14 @@
 import About from "@/components/sections/About";
 import Hero from "@/components/sections/Hero";
+import Services from "@/components/sections/Services";
 import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
+import Footer from "@/components/sections/Footer";
 
 export default function HomePage() {
   return (
     <>
-      <div className="min-h-screen w-full relative">
-        {/* Your Content/Components */}
-        {/* Hero Section */}
+      <main className="min-h-screen w-full relative">
         <Hero />
         <section
           id="about"
@@ -16,35 +16,23 @@ export default function HomePage() {
         >
           <About />
         </section>
+        <section id="services" className="py-8">
+          <Services />
+        </section>
         <section
           id="projects"
           className="min-h-screen flex items-center justify-center"
         >
           <Projects />
         </section>
-        {/* <section
-          id="skills"
-          className="min-h-screen border-2 border-white flex items-center justify-center"
-        >
-          <Skills />
-        </section> */}
-        {/* <section
-          id="resume"
-          className="min-h-screen bg-card/30 flex items-center justify-center"
-        >
-          <div className="text-center space-y-4">
-            <h2 className="heading-lg">Resume Section</h2>
-            <p className="body-lg">Coming soon...</p>
-          </div>
-        </section> */}
         <section
           id="contact"
           className="min-h-screen flex items-center justify-center"
         >
           <Contact />
         </section>
-      </div>
-      ;
+      </main>
+      <Footer />
     </>
   );
 }

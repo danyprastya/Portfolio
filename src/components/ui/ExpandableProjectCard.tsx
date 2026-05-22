@@ -9,7 +9,6 @@ import {
   ExpandableCardFooter,
   ExpandableContent,
 } from "@/components/ui/expandable";
-// import { motion } from "framer-motion";
 import Image from "next/image";
 import { Github, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,7 +18,7 @@ import { cn } from "@/lib/utils";
 
 interface ExpandableProjectCardProps {
   project: Project;
-  className?: string; // tambahin di sini
+  className?: string;
 }
 
 interface Project {
@@ -30,6 +29,7 @@ interface Project {
   image: string;
   githubUrl: string;
   websiteUrl: string;
+  technologies?: string[];
   showVisitLink?: boolean;
 }
 
@@ -48,15 +48,15 @@ export function ExpandableProjectCard({
               "w-full relative glass border border-border/20 shadow-lg rounded-lg sm:rounded-xl md:rounded-[2rem] overflow-hidden",
               className, // merge class tambahan
             )}
-            collapsedSize={{ width: 330, height: 220 }}
-            expandedSize={{ width: 430, height: 320 }}
+            collapsedSize={{ width: 350, height: 220 }}
+            expandedSize={{ width: 440, height: 380 }}
             hoverToExpand={false}
           >
             {/* HEADER */}
             <ExpandableCardHeader className="p-0">
               {!isExpanded ? (
                 // collapsed → image as background
-                <div className="relative w-[330px] h-[220px]">
+                <div className="relative w-full h-[220px]">
                   <Image
                     src={project.image}
                     alt={project.name}
@@ -99,9 +99,22 @@ export function ExpandableProjectCard({
             {isExpanded && (
               <ExpandableCardContent className="px-2 sm:px-4">
                 <ExpandableContent preset="fade" keepMounted>
-                  <div className="mt-4 text-sm text-muted-foreground h-32 max-h-34 px-2 pb-2">
+                  <div className="mt-4 text-sm text-muted-foreground px-2 pb-2">
                     {project.description}
                   </div>
+                  {project.technologies && project.technologies.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 px-2 pt-2">
+                      {project.technologies.map((tech) => (
+                        <Badge
+                          key={tech}
+                          variant="secondary"
+                          className="text-xs font-normal"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
                 </ExpandableContent>
               </ExpandableCardContent>
             )}

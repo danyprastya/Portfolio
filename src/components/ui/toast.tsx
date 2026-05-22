@@ -2,7 +2,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { X, CheckCircle2, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 

@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { motion, AnimatePresence } from "motion/react";
-import { Mail, User, MessageSquare, Send, Paperclip, Star } from "lucide-react";
+import { Mail, User, MessageSquare, Send } from "lucide-react";
+import { cn } from "@/lib/utils";
 import EmailSendingStatus from "@/components/ui/email-sending-status";
-import FileUpload from "@/components/ui/file-upload";
 
 // Validation schema
 const contactSchema = z.object({
@@ -29,25 +29,7 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 type EmailStatus = "sending" | "success" | "error";
 
-// Utility functions
-function cn(...classes: (string | undefined | null | false)[]): string {
-  return classes.filter(Boolean).join(" ");
-}
 
-const useToast = () => {
-  const addToast = ({
-    type,
-    title,
-    description,
-  }: {
-    type: string;
-    title: string;
-    description: string;
-  }) => {
-    console.log(`[Toast ${type.toUpperCase()}] ${title}: ${description}`);
-  };
-  return { addToast };
-};
 
 // Input component interfaces
 interface AnimatedInputProps {
@@ -206,11 +188,9 @@ const MinimalTextarea = ({
 // Main Contact Component
 export default function Contact() {
   const [emailStatus, setEmailStatus] = useState<EmailStatus | null>(null);
-  const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
   const [currentFormData, setCurrentFormData] =
     useState<ContactFormData | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
-  const { addToast } = useToast();
 
   const {
     handleSubmit,
@@ -236,20 +216,12 @@ export default function Contact() {
     setEmailStatus("sending");
 
     try {
-      console.log(
-        "[Contact] Submitting form with attached files:",
-        attachedFiles
-      );
 
       const submitData = new FormData();
       submitData.append("name", formData.name);
       submitData.append("email", formData.email);
       submitData.append("subject", formData.subject);
       submitData.append("message", formData.message);
-
-      attachedFiles.forEach((file, index) => {
-        submitData.append(`attachment_${index}`, file);
-      });
 
       const response = await fetch("/api/sendEmail", {
         method: "POST",
@@ -260,15 +232,9 @@ export default function Contact() {
 
       if (response.ok) {
         setEmailStatus("success");
-        addToast({
-          type: "success",
-          title: "Email sent successfully!",
-          description: "I'll get back to you within 24-48 hours.",
-        });
 
         setTimeout(() => {
           reset();
-          setAttachedFiles([]);
           setEmailStatus(null);
           setCurrentFormData(null);
         }, 3000);
@@ -277,11 +243,6 @@ export default function Contact() {
         setErrorMessage(
           result.error || "Failed to send email. Please try again later."
         );
-        addToast({
-          type: "error",
-          title: "Failed to send email",
-          description: result.error || "Please try again later.",
-        });
       }
     } catch (error) {
       console.error("Error sending email:", error);
@@ -289,32 +250,7 @@ export default function Contact() {
       setErrorMessage(
         "Network error. Please check your connection and try again."
       );
-      addToast({
-        type: "error",
-        title: "Network error",
-        description: "Please check your connection and try again.",
-      });
     }
-  };
-
-  const handleFileUpload = (file: File) => {
-    console.log("[Contact] File uploaded:", file.name, file.size);
-    setAttachedFiles((prev) => [...prev, file]);
-    addToast({
-      type: "success",
-      title: "File attached",
-      description: `${file.name} has been attached to your message.`,
-    });
-  };
-
-  const handleFileRemove = (fileIndex: number) => {
-    console.log("[Contact] File removed at index:", fileIndex);
-    setAttachedFiles((prev) => prev.filter((_, index) => index !== fileIndex));
-    addToast({
-      type: "info",
-      title: "File removed",
-      description: "Attachment has been removed from your message.",
-    });
   };
 
   const handleStatusComplete = () => {
@@ -398,7 +334,7 @@ export default function Contact() {
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
-            transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+            transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
             className="inline-flex items-center justify-center w-20 h-20 mb-8 relative"
           >
             <motion.div
@@ -417,40 +353,50 @@ export default function Contact() {
           <motion.h2
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
             className="text-4xl lg:text-6xl font-light tracking-tight mb-6 text-zinc-900 dark:text-zinc-100"
           >
-            Let&apos;s{" "}
+            Start Your{" "}
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent font-medium">
-              Connect
+              Project
             </span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
             className="text-xl font-light text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed"
           >
-            Have an idea you&apos;d like to explore? I&apos;d love to hear about
-            it and discuss how we can bring it to life.
+            Tell me what you need. I&apos;ll get back with a plan and a quote
+            — no strings attached.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.35, duration: 0.4 }}
+            className="flex items-center justify-center gap-2 mt-4 text-sm text-zinc-500 dark:text-zinc-400"
+          >
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            Usually respond within 48 hours · UTC+7
+          </motion.div>
         </motion.div>
 
         {/* Contact Form */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.8 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
           className="max-w-3xl mx-auto"
         >
-          <div className="space-y-12">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-12">
             {/* Name and Email Row */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.1, duration: 0.6 }}
+                transition={{ delay: 0.4, duration: 0.4 }}
               >
                 <MinimalInput
                   label="Your Name"
@@ -476,7 +422,7 @@ export default function Contact() {
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.2, duration: 0.6 }}
+                transition={{ delay: 0.45, duration: 0.4 }}
               >
                 <MinimalInput
                   label="Email Address"
@@ -505,7 +451,7 @@ export default function Contact() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3, duration: 0.6 }}
+              transition={{ delay: 0.5, duration: 0.4 }}
             >
               <MinimalInput
                 label="Subject"
@@ -532,7 +478,7 @@ export default function Contact() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.4, duration: 0.6 }}
+              transition={{ delay: 0.55, duration: 0.4 }}
             >
               <MinimalTextarea
                 label="Your Message"
@@ -555,70 +501,15 @@ export default function Contact() {
               )}
             </motion.div>
 
-            {/* File Upload */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5, duration: 0.6 }}
-              className="space-y-6"
-            >
-              <div className="flex items-center gap-4">
-                <motion.div
-                  whileHover={{ rotate: 12 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <Paperclip className="w-6 h-6 text-zinc-500 dark:text-zinc-400" />
-                </motion.div>
-                <div>
-                  <h3 className="text-lg font-light text-zinc-900 dark:text-zinc-100">
-                    Share Files
-                  </h3>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                    Optional attachments to help explain your project
-                  </p>
-                </div>
-                {attachedFiles.length > 0 && (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="ml-auto flex items-center gap-2 px-3 py-1 border border-blue-200 dark:border-blue-800 rounded-full text-sm text-blue-600 dark:text-blue-400"
-                  >
-                    <Star className="w-4 h-4" />
-                    {attachedFiles.length} file
-                    {attachedFiles.length !== 1 ? "s" : ""}
-                  </motion.div>
-                )}
-              </div>
-
-              <FileUpload
-                onUploadSuccess={handleFileUpload}
-                onFileRemove={handleFileRemove}
-                currentFiles={attachedFiles}
-                acceptedFileTypes={[
-                  "image/*",
-                  "application/pdf",
-                  ".doc",
-                  ".docx",
-                  ".txt",
-                  ".zip",
-                  ".rar",
-                ]}
-                maxFileSize={10 * 1024 * 1024}
-                uploadDelay={0}
-                className="w-full"
-              />
-            </motion.div>
-
             {/* Submit Button */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.6, duration: 0.6 }}
+              transition={{ delay: 0.6, duration: 0.4 }}
               className="flex justify-center pt-8"
             >
               <motion.button
-                type="button"
-                onClick={handleSubmit(onSubmit)}
+                type="submit"
                 disabled={isSubmitting}
                 whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                 whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
@@ -663,7 +554,7 @@ export default function Contact() {
                 </div>
               </motion.button>
             </motion.div>
-          </div>
+          </form>
         </motion.div>
 
         {/* Footer Message */}
