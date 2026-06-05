@@ -1,6 +1,6 @@
 "use client";
 
-import { Github, Linkedin, Mail, Heart, ArrowUp } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
 import Link from "next/link";
 import socialData from "@/data/social.json";
 
@@ -83,9 +83,6 @@ export default function Footer() {
                   </Link>
                 ))}
             </div>
-            {/* <p className="text-sm text-muted-foreground">
-              Based in Indonesia · UTC+7 · Usually reply within 48 hours
-            </p> */}
           </div>
         </div>
 
@@ -95,10 +92,10 @@ export default function Footer() {
             &copy; {currentYear} Dany Prastya. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="w-8 h-8 rounded-lg bg-secondary/50 border border-border/30 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300"
+              className="w-9 h-9 rounded-lg bg-secondary/50 border border-border/30 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300"
               aria-label="Back to top"
             >
               <ArrowUp className="w-4 h-4" />

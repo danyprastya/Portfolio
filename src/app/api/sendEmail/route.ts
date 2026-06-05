@@ -123,114 +123,34 @@ export async function POST(request: Request) {
       </html>
     `
 
-    // Client confirmation email template  
-    const clientEmailHTML = `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Message Received - Thank You</title>
-      </head>
-      <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333333; background-color: #f5f5f5; padding: 20px; margin: 0;">
-        <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 40px;">
-          <div style="text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #f0f0f0;">
-            <h1 style="color: #2c3e50; font-size: 24px; font-weight: 600; margin: 0 0 8px 0;">Thank You for Your Message</h1>
-            <p style="color: #666666; font-size: 14px; margin: 0;">Your message has been received and will be reviewed shortly</p>
-          </div>
-          
-          <div style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 4px; border-left: 3px solid #007bff;">
-            <div style="font-weight: 600; color: #495057; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Hello</div>
-            <div style="color: #212529; font-size: 15px;">${name}</div>
-          </div>
-          
-          <div style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 4px; border-left: 3px solid #007bff;">
-            <div style="font-weight: 600; color: #495057; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Your Subject</div>
-            <div style="color: #212529; font-size: 15px;">${subject}</div>
-          </div>
-
-          <div style="background: #f8f9fa; border-left: 3px solid #6c757d; padding: 20px; border-radius: 4px; margin: 20px 0;">
-            <h3 style="color: #495057; font-size: 14px; font-weight: 600; margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 0.5px;">Your Message</h3>
-            <div style="color: #212529; font-size: 15px; line-height: 1.7; white-space: pre-wrap;">${message.replace(/\n/g, '<br>')}</div>
-          </div>
-
-          <div style="margin-bottom: 20px; padding: 15px; background: #e8f5e9; border-radius: 4px; border-left: 3px solid #28a745;">
-            <div style="font-weight: 600; color: #495057; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">What happens next?</div>
-            <div style="color: #212529; font-size: 15px;">I'll review your message and get back to you within 24-48 hours. Thank you for reaching out!</div>
-          </div>
-
-          <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #f0f0f0; text-align: center;">
-            <p style="color: #6c757d; font-size: 12px; margin: 0 0 5px 0;">This is an automated confirmation. Please do not reply to this email.</p>
-            <p style="color: #6c757d; font-size: 12px; margin: 0 0 5px 0;">For direct contact: <a href="mailto:${process.env.MAIL_RECEIVER_ADDRESS}" style="color: #007bff;">${process.env.MAIL_RECEIVER_ADDRESS}</a></p>
-            <p style="color: #adb5bd; font-size: 11px; margin: 0;">${currentDate}</p>
-          </div>
-        </div>
-      </body>
-      </html>
-    `
-
-    // Send admin notification email
-    // Note: For Resend free tier without verified domain, 'from' must be 'onboarding@resend.dev'
-    const fromEmail ="onboarding@resend.dev"
-    
-    console.log("[Contact] Sending admin notification email...")
-    console.log("[Contact] Using from email:", fromEmail)
-    console.log("[Contact] Sending to:", process.env.MAIL_RECEIVER_ADDRESS)
-    console.log("[Contact] Reply-to (client email):", email)
-    
-    // Send email TO you (admin), with reply-to set to client's email
-    // When you click "Reply" in your inbox, it will reply to the client!
-    const adminResult = await resend.emails.send({
-      from: fromEmail,
+    // Send admin notification only (free tier — no domain verified)
+    // reply-to is set to visitor's email so when you hit Reply it goes straight to them
+    const result = await resend.emails.send({
+      from: "onboarding@resend.dev",
       to: process.env.MAIL_RECEIVER_ADDRESS as string,
-      replyTo: email, // This is the client's email - when you reply, it goes to them!
-      subject: `New Contact: ${subject} - from ${name}`,
+      replyTo: email,
+      subject: `New Contact: ${subject} — from ${name}`,
       html: adminEmailHTML,
-      attachments: attachments.length > 0 ? attachments.map(att => ({
-        filename: att.filename,
-        content: att.content,
-      })) : undefined,
+      attachments: attachments.length > 0
+        ? attachments.map((att) => ({ filename: att.filename, content: att.content }))
+        : undefined,
     })
 
-    if (adminResult.error) {
-      console.error("[Contact] Failed to send admin email:", adminResult.error)
-      throw new Error(adminResult.error.message)
-    }
-    console.log("[Contact] Admin email sent successfully:", adminResult.data?.id)
-
-    // Send confirmation email TO the client
-    console.log("[Contact] Sending client confirmation email to:", email)
-    const clientResult = await resend.emails.send({
-      from: fromEmail,
-      to: email,
-      replyTo: process.env.MAIL_RECEIVER_ADDRESS as string, // If client replies, it goes to you
-      subject: `Message Received: ${subject}`,
-      html: clientEmailHTML,
-    })
-
-    if (clientResult.error) {
-      console.error("[Contact] Failed to send client email:", clientResult.error)
-      // Don't throw - admin email was sent successfully
-    } else {
-      console.log("[Contact] Client confirmation email sent successfully:", clientResult.data?.id)
+    if (result.error) {
+      console.error("[Contact] Send failed:", result.error)
+      throw new Error(result.error.message)
     }
 
-    return NextResponse.json({ 
-      message: "Email sent successfully",
+    console.log("[Contact] Email sent:", result.data?.id)
+    return NextResponse.json({
+      message: "Message sent successfully",
       recipientName: name,
-      attachmentCount: attachments.length
     })
   } catch (error) {
-    console.error("[Contact] Error sending email:", error)
-    
-    let errorMessage = "Failed to send email. Please try again later."
-    if (error instanceof Error) {
-      errorMessage = error.message
-    }
-    
-    return NextResponse.json({ 
-      error: errorMessage,
-      details: error instanceof Error ? error.message : "Unknown error"
-    }, { status: 500 })
+    console.error("[Contact] Error:", error)
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Failed to send. Please try again." },
+      { status: 500 }
+    )
   }
 }

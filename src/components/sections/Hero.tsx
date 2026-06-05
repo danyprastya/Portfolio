@@ -83,6 +83,7 @@ const Hero = () => {
       <div className="relative z-10 container-custom section-padding text-center max-w-4xl mx-auto">
         <div className="space-y-10">
 
+
           {/* Headline */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

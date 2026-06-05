@@ -1,34 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { cn } from "@/lib/utils";
-import {
-  Phone,
-  Github,
-  Linkedin,
-  MapPin,
-  Clock3,
-} from "lucide-react";
-import {
-  motion,
-  useMotionValue,
-  useTransform,
-  type Variants,
-} from "motion/react";
-import { useState, useEffect, useRef } from "react";
+import { motion, useMotionValue, useTransform, type Variants } from "motion/react";
+import { useState } from "react";
 import { GlowEffect } from "../ui/glow-effect";
-import Image from "next/image";
-import { TextLoop } from "../ui/text-loop";
 import skillData from "@/data/skills.json";
-import * as SiIcons from "react-icons/si";
-import { Button } from "@/components/ui/button";
-import {
-  TooltipProvider,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from "@/components/ui/tooltip";
-import EnhancedSocialButton from "../ui/social-button";
-import EmailDialog from "../ui/email-button";
+import { GitHubHeatmap } from "../ui/GitHubHeatmap";
+import { ProfileCard } from "@/components/about/ProfileCard";
+import { TechStackCard } from "@/components/about/TechStackCard";
+import { SocialCard } from "@/components/about/SocialCard";
+import { AchievementsCard } from "@/components/about/AchievementsCard";
+import { Github, Linkedin } from "lucide-react";
 
 interface BentoItem {
   id: string;
@@ -89,7 +70,7 @@ const bentoItems: BentoItem[] = [
     href: "#",
     feature: "profile",
     profile: {
-      imageUrl: "/profile.png",
+      imageUrl: "/profile_pic.png",
       title: "Hello, I'm Dany Prastya",
       description: (
         <>
@@ -173,7 +154,7 @@ const bentoItems: BentoItem[] = [
         { label: "Technologies", value: 15, suffix: "+", color: "#f59e0b" },
         {
           label: "Avg. Response",
-          value: 48,
+          value: 24,
           suffix: "h",
           color: "#8b5cf6",
         },
@@ -190,120 +171,10 @@ const bentoItems: BentoItem[] = [
   },
 ];
 
-// Social and Contact Feature Component
-const SocialAndContact = ({
-  social,
-}: {
-  social: {
-    contacts: { whatsapp: string; email: string };
-    socials: Array<{
-      name: string;
-      url: string;
-      icon: React.ComponentType<any>;
-      color: string;
-    }>;
-    availability: {
-      status: "available" | "busy" | "unavailable";
-      location: string;
-      timezone: string;
-    };
-  };
-}) => {
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "available":
-        return "bg-green-500";
-      case "busy":
-        return "bg-yellow-500";
-      case "unavailable":
-        return "bg-red-500";
-      default:
-        return "bg-gray-500";
-    }
-  };
-
-  const handleWhatsApp = () => {
-    const message = encodeURIComponent(
-      "Hi Dany! I'm interested in discussing a project with you."
-    );
-    window.open(
-      `https://wa.me/${social.contacts.whatsapp.replace(
-        /[^\d]/g,
-        ""
-      )}?text=${message}`,
-      "_blank"
-    );
-  };
-
-  return (
-    <div className="space-y-6 mt-4">
-      {/* Availability Status */}
-      <div className="flex items-center w-fit gap-3 p-3 rounded-lg bg-neutral-50 dark:bg-neutral-800/50">
-        <div className="relative">
-          <div
-            className={`w-3 h-3 rounded-full ${getStatusColor(
-              social.availability.status
-            )}`}
-          />
-          <div
-            className={`absolute inset-0 w-3 h-3 rounded-full ${getStatusColor(
-              social.availability.status
-            )} animate-ping opacity-75`}
-          />
-        </div>
-        <div className="text-sm">
-          <div className="font-medium text-neutral-900 dark:text-neutral-100">
-            Open to work
-          </div>
-        </div>
-      </div>
-
-      {/* Location & Timezone */}
-      <div className="flex items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400">
-        <div className="flex items-center gap-1">
-          <MapPin className="w-4 h-4" />
-          {social.availability.location}
-        </div>
-        <div className="flex items-center gap-1">
-          <Clock3 className="w-4 h-4" />
-          {social.availability.timezone}
-        </div>
-      </div>
-
-      {/* Main CTAs */}
-      <div className="flex items-center justify-start gap-3">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                onClick={handleWhatsApp}
-                className={cn(
-                  "w-12 h-12 p-0",
-                  "bg-neutral-100/80 dark:bg-neutral-800/80",
-                  "hover:bg-neutral-200/80 dark:hover:bg-green-400",
-                  "text-neutral-700 dark:text-neutral-300 dark:hover:text-white",
-                  "border border-neutral-200/60 dark:border-neutral-700/60",
-                  "backdrop-blur-sm transition-all duration-300",
-                  "rounded-xl",
-                  "hover:scale-105"
-                )}
-              >
-                <Phone className="w-5 h-5" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="top" className="glass text-sm font-medium">
-              <p>WhatsApp Chat</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-
-        <EmailDialog email={social.contacts.email} />
-
-        <EnhancedSocialButton />
-      </div>
-    </div>
-  );
-};
+// Delegate to extracted sub-component
+const SocialAndContact = ({ social }: { social: React.ComponentProps<typeof SocialCard>["social"] }) => (
+  <SocialCard social={social} />
+);
 
 // Rest of the existing components remain the same...
 const fadeInUp: Variants = {
@@ -330,298 +201,20 @@ const staggerContainer: Variants = {
 };
 
 // Achievement Dashboard Feature Component
-const AchievementFeature = ({
-  achievements,
-}: {
-  achievements: {
-    stats: Array<{
-      label: string;
-      value: number;
-      suffix?: string;
-      color: string;
-    }>;
-    highlights: string[];
-  };
-}) => {
-  const [counters, setCounters] = useState(achievements.stats.map(() => 0));
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+// Delegate to extracted sub-component
+const AchievementFeature = ({ achievements }: { achievements: React.ComponentProps<typeof AchievementsCard>["achievements"] }) => (
+  <AchievementsCard achievements={achievements} />
+);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
+// Delegate to extracted sub-component
+const Profile = ({ profile }: { profile: React.ComponentProps<typeof ProfileCard>["profile"] }) => (
+  <ProfileCard profile={profile} />
+);
 
-          // Animate counters
-          achievements.stats.forEach((stat, index) => {
-            const duration = 2000;
-            const steps = 60;
-            const increment = stat.value / steps;
-            let current = 0;
-
-            const timer = setInterval(() => {
-              current += increment;
-              if (current >= stat.value) {
-                current = stat.value;
-                clearInterval(timer);
-              }
-
-              setCounters((prev) => {
-                const newCounters = [...prev];
-                newCounters[index] = Math.floor(current);
-                return newCounters;
-              });
-            }, duration / steps);
-          });
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [achievements.stats, hasAnimated]);
-
-  return (
-    <div ref={containerRef} className="space-y-6 mt-4">
-      {/* Stats Grid */}
-      <div className="grid grid-cols-2 gap-4">
-        {achievements.stats.map((stat, index) => (
-          <motion.div
-            key={stat.label}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={hasAnimated ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
-            className="text-center p-4 rounded-lg bg-white/50 dark:bg-black/20 backdrop-blur-sm"
-          >
-            <div
-              className="text-2xl font-bold mb-1"
-              style={{ color: stat.color }}
-            >
-              {counters[index]}
-              {stat.suffix || ""}
-            </div>
-            <div className="text-xs text-neutral-600 dark:text-neutral-400 font-medium">
-              {stat.label}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Highlights */}
-      {/* <div className="space-y-3">
-        <h4 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
-          Key Highlights
-        </h4>
-        <div className="space-y-2">
-          {achievements.highlights.map((highlight, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={hasAnimated ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.5 + index * 0.1 }}
-              className="flex items-center gap-2 text-sm text-neutral-700 dark:text-neutral-300"
-            >
-              <span className="text-base">{highlight.split(" ")[0]}</span>
-              <span className="flex-1">{highlight.substring(2)}</span>
-            </motion.div>
-          ))}
-        </div>
-      </div> */}
-    </div>
-  );
-};
-
-const Profile = ({
-  profile,
-}: {
-  profile: {
-    imageUrl: string;
-    title: React.ReactNode;
-    description: React.ReactNode;
-    role: string[];
-  };
-}) => {
-  return (
-    <div className="pt-2 relative">
-      <div className="grid grid-flow-col justify-center items-center grid-rows-3 gap-4 ">
-        <motion.div
-          className="row-span-3 justify-center items-center flex relative w-full h-full"
-          animate={{
-            y: [0, -15, 0],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <Image src={profile.imageUrl} alt="profil" width={130} height={130} />
-        </motion.div>
-        <div className="leading-tight col-span-2 gap-2">
-          <h3 className="">{profile.title}</h3>
-
-          <div className="inline-flex whitespace-pre-wrap text-sm">
-            i&apos;m a{" "}
-            <TextLoop
-              className="overflow-y-clip"
-              transition={{
-                type: "spring",
-                stiffness: 900,
-                damping: 80,
-                mass: 10,
-              }}
-              variants={{
-                initial: {
-                  y: 20,
-                  rotateX: 90,
-                  opacity: 0,
-                  filter: "blur(4px)",
-                },
-                animate: {
-                  y: 0,
-                  rotateX: 0,
-                  opacity: 1,
-                  filter: "blur(0px)",
-                },
-                exit: {
-                  y: -20,
-                  rotateX: -90,
-                  opacity: 0,
-                  filter: "blur(4px)",
-                },
-              }}
-            >
-              {profile.role}
-            </TextLoop>
-          </div>
-        </div>
-        <div className="text-left col-span-2 row-span-2">
-          {profile.description}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const TechStackFeature = ({
-  techStack,
-}: {
-  techStack: Array<{
-    category: string;
-    items: Array<{ title: string; icon: string }>;
-  }>;
-}) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("Frontend");
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  // extract unique categories
-  const categories = [...techStack.map((group) => group.category)];
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !hasAnimated) {
-        setHasAnimated(true);
-      }
-    });
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [hasAnimated]);
-
-  // filter by selection
-  const filteredGroups =
-    selectedCategory === "All"
-      ? techStack
-      : techStack.filter((group) => group.category === selectedCategory);
-
-  return (
-    <div ref={containerRef} className="space-y-6 mt-4">
-      {/* category filter buttons */}
-      <div className="flex flex-wrap gap-2">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              setSelectedCategory(cat);
-            }}
-            className={`px-4 py-1 rounded-lg border text-sm transition-colors ${
-              selectedCategory === cat
-                ? "bg-neutral-800 text-white dark:bg-neutral-200 dark:text-black"
-                : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300"
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-
-      {/* render filtered items */}
-      {filteredGroups.map((group, gIdx) => (
-        <div key={group.category + gIdx}>
-          <h3 className="text-base font-semibold mb-3">{group.category}</h3>
-          <div className="flex flex-row flex-wrap gap-3 w-full">
-            {group.items.map((tech, idx) => {
-              const IconComp = (SiIcons as any)[tech.icon];
-              return (
-                <motion.div
-                  key={tech.title + idx}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  className="flex flex-row items-center gap-2 px-4 py-1 rounded-lg border"
-                >
-                  {IconComp && <IconComp className="size-6" />}
-                  <span className="text-sm">{tech.title}</span>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      ))}
-      {/* Progress Skills Bar (Optional Enhancement) */}
-      {/* <div className="space-y-3">
-        <h4 className="text-base font-semibold text-neutral-800 dark:text-neutral-200">
-          Expertise Level
-        </h4>
-        {[
-          { skill: "Full-Stack Development", level: 85 },
-          { skill: "Mobile Apps Development", level: 80 },
-          { skill: "IoT Systems", level: 75 },
-          { skill: "Data Analyst", level: 70 },
-        ].map((item, index) => (
-          <div key={item.skill} className="space-y-1">
-            <div className="flex justify-between text-xs">
-              <span className="text-neutral-600 dark:text-neutral-400">
-                {item.skill}
-              </span>
-              <span className="text-neutral-500 dark:text-neutral-500">
-                {item.level}%
-              </span>
-            </div>
-            <div className="h-1.5 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
-              <motion.div
-                className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                initial={{ width: 0 }}
-                animate={hasAnimated ? { width: `${item.level}%` } : {}}
-                transition={{ delay: 1 + index * 0.1, duration: 0.8 }}
-              />
-            </div>
-          </div>
-        ))}
-      </div> */}
-    </div>
-  );
-};
+// Delegate to extracted sub-component
+const TechStackFeature = ({ techStack }: { techStack: React.ComponentProps<typeof TechStackCard>["techStack"] }) => (
+  <TechStackCard techStack={techStack} />
+);
 
 const BentoCard = ({ item }: { item: BentoItem }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -776,6 +369,17 @@ export default function About() {
               <BentoCard item={bentoItems[3]} />
             </motion.div>
           </div>
+        </motion.div>
+
+        {/* GitHub Activity */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="mt-8"
+        >
+          <GitHubHeatmap />
         </motion.div>
       </div>
     </section>

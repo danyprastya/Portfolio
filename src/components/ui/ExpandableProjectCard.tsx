@@ -46,7 +46,7 @@ export function ExpandableProjectCard({
           <ExpandableCard
             className={cn(
               "w-full relative glass border border-border/20 shadow-lg rounded-lg sm:rounded-xl md:rounded-[2rem] overflow-hidden",
-              className, // merge class tambahan
+              className, // merge additional classes
             )}
             collapsedSize={{ width: 350, height: 220 }}
             expandedSize={{ width: 440, height: 380 }}
